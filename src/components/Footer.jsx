@@ -75,7 +75,7 @@ const Footer = () => {
               </span>
             </Link>
 
-            <p className="text-white/55 text-lg leading-relaxed max-w-sm mx-auto lg:mx-0">
+            <p className="font-script-desc text-white/55 text-lg leading-relaxed max-w-sm mx-auto lg:mx-0">
               A premium animation studio taking the very best of Indian creative
               talent to global screens.
             </p>
@@ -180,7 +180,7 @@ const Footer = () => {
           {/* Copyright */}
           <div className="flex flex-col md:flex-row items-center justify-center text-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/45">
             <Asterisk className="w-3.5 h-3.5 text-accent" spin />© 2026 Monal
-            Digital €” Crafted with vision in Haldwani
+            Digital — Crafted with vision in Haldwani
           </div>
         </div>
       </div>

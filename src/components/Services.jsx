@@ -60,7 +60,7 @@ const Services = () => {
           <p
             data-reveal="up"
             data-reveal-delay="0.1"
-            className="text-muted max-w-sm leading-relaxed"
+            className="font-script-desc text-muted max-w-sm leading-relaxed"
           >
             From the first sketch to the final cut, we craft every frame with
             intention and turn bold ideas into stories worth watching.
@@ -130,7 +130,7 @@ const Services = () => {
                         </h3>
                         <p
                           data-svc-line
-                          className="text-ink/75 text-base lg:text-lg leading-relaxed mb-7 max-w-md"
+                          className="font-script-desc text-ink/75 text-base lg:text-lg leading-relaxed mb-7 max-w-md"
                         >
                           {s.desc}
                         </p>
@@ -172,12 +172,14 @@ const Services = () => {
                 <div className="absolute inset-0 bg-ink/82" />
                 <div className="relative text-paper">
                   <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
-                    {String(i + 1).padStart(2, "0")} â€” Capability
+                    {String(i + 1).padStart(2, "0")} — Capability
                   </span>
                   <h3 className="font-display capitalize text-4xl tracking-tight mt-3 mb-4">
                     {s.title}
                   </h3>
-                  <p className="text-white/70 leading-relaxed mb-6">{s.desc}</p>
+                  <p className="font-script-desc text-white/70 leading-relaxed mb-6">
+                    {s.desc}
+                  </p>
                   <Features list={s.features} tone="text-white/80" />
                   <span className="mt-7 inline-flex items-center gap-2.5 rounded-full bg-accent text-ink px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.16em]">
                     Explore services

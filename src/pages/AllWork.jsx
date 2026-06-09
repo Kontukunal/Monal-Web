@@ -43,9 +43,9 @@ const AllWork = () => {
           <p
             data-reveal="up"
             data-reveal-delay="0.12"
-            className="mt-7 text-white/60 text-lg leading-relaxed max-w-xl mx-auto"
+            className="font-script-desc mt-7 text-white/60 text-lg leading-relaxed max-w-xl mx-auto"
           >
-            Original IPs, co-productions, and series â€” every story we&apos;ve
+            Original IPs, co-productions, and series — every story we&apos;ve
             had the privilege to bring to life.
           </p>
         </div>

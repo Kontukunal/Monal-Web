@@ -74,6 +74,17 @@
   font-weight: 600;
 }
 
+/* Script-styled section descriptions (Caveat). The lead paragraph under each
+   section heading uses this. Sized in `em` so it scales with whatever Tailwind
+   text-size the element already carries, then bumped ~20% because the Caveat
+   face reads visibly smaller than the Fredoka body at the same nominal size. */
+.font-script-desc {
+  font-family: var(--font-script);
+  font-weight: 500;
+  font-size: 1.34em;
+  letter-spacing: 0.005em;
+}
+
 /* Headline color treatment — paints heading text with the MONAL logo's actual
    faceted artwork via background-clip: text. Uses `cover` sizing so the logo
    keeps its native aspect ratio (no squashing in short words) and shows the

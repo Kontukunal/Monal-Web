@@ -43,9 +43,9 @@ const Discover = () => {
         <p
           data-reveal="up"
           data-reveal-delay="0.1"
-          className="text-muted mt-6 max-w-md mx-auto leading-relaxed"
+          className="font-script-desc text-muted mt-6 max-w-md mx-auto leading-relaxed"
         >
-          Three doors. Pick yours â€” and meet the worlds we build behind each.
+          Three doors. Pick yours — and meet the worlds we build behind each.
         </p>
       </div>
 
@@ -60,7 +60,7 @@ const Discover = () => {
             to={t.href}
             className="group relative flex flex-col items-center justify-center px-6 md:px-10 py-14 md:py-20 min-h-[400px] md:min-h-[680px] border-b md:border-b-0 md:border-r border-line last:border-r-0 hover:bg-accent transition-colors duration-300"
           >
-            {/* Top row â€” index + asterisk (absolute so content can truly center) */}
+            {/* Top row — index + asterisk (absolute so content can truly center) */}
             <div className="absolute top-8 left-8 right-8 md:top-10 md:left-10 md:right-10 flex items-start justify-between">
               <span className="font-display text-2xl text-ink/30 group-hover:text-ink/60 transition-colors">
                 {String(i + 1).padStart(2, "0")}

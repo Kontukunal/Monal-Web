@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
+import Intro from "../components/Intro";
 import Showreel from "../components/Showreel";
 import ShowreelModal from "../components/ShowreelModal";
 import Brands from "../components/Brands";
+import Partners from "../components/Partners";
 import ContentLibrary from "../components/ContentLibrary";
 import About from "../components/About";
 import Services from "../components/Services";
 import Team from "../components/Team";
-import Discover from "../components/Discover";
+import Testimonials from "../components/Testimonials";
 import Footer from "../components/Footer";
 import { useUiAnimations } from "../hooks/useUiAnimations";
 
@@ -22,15 +24,17 @@ const Home = () => {
   return (
     <>
       <Header />
+      <Intro />
       <Hero />
       <Showreel setShowreelOpen={setShowreelOpen} />
       {showreelOpen && <ShowreelModal setShowreelOpen={setShowreelOpen} />}
+      <About />
       <ContentLibrary />
       <Brands />
+      <Partners />
       <Services />
-      <About />
       <Team />
-      <Discover />
+      <Testimonials />
       <Footer />
     </>
   );

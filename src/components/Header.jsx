@@ -10,19 +10,20 @@ import logo from "../assets/Monal_Logo.png";
    landing page they smooth-scroll, from a sub-page they return home. */
 const NAV = [
   ["Home", "/#home"],
+  ["About Us", "/#about"],
   ["Work", "/#work"],
   ["Solutions", "/#services"],
-  ["Studio", "/#about"],
+
   ["Team", "/#team"],
 ];
 
 const NavLink = ({ href, children }) => (
   <Link
     to={href}
-    className="group relative text-[13px] font-semibold uppercase tracking-[0.12em] text-ink/55 hover:text-ink transition-colors"
+    className="group relative font-script text-2xl leading-none text-ink/60 hover:text-ink transition-colors"
   >
     {children}
-    <span className="absolute -bottom-1.5 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+    <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
   </Link>
 );
 
@@ -50,16 +51,14 @@ const Header = () => {
         delay: 0.15,
       });
     },
-    { scope: rootRef }
+    { scope: rootRef },
   );
 
   return (
     <header
       ref={rootRef}
       className={`fixed top-0 left-0 w-full z-60 bg-paper transition-all duration-500 ${
-        isScrolled
-          ? "py-3 border-b border-line"
-          : "py-6"
+        isScrolled ? "py-3 border-b border-line" : "py-6"
       }`}
     >
       <div className="max-w-[1500px] mx-auto px-6 md:px-12 flex justify-between items-center">
@@ -85,10 +84,7 @@ const Header = () => {
         </Link>
 
         {/* Center nav */}
-        <nav
-          data-header-item
-          className="hidden lg:flex items-center gap-9"
-        >
+        <nav data-header-item className="hidden lg:flex items-center gap-9">
           {NAV.map(([label, href]) => (
             <NavLink key={href} href={href}>
               {label}
@@ -137,7 +133,7 @@ const Header = () => {
               onClick={() => setOpen(false)}
               className="group flex items-center justify-between py-3 border-b border-white/10 last:border-0"
             >
-              <span className="font-display text-3xl tracking-tight">
+              <span className="font-script text-4xl leading-none">
                 {label}
               </span>
               <ArrowGlyph className="w-5 h-5 text-white/40 group-hover:text-accent transition-colors" />

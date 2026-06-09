@@ -6,7 +6,7 @@ import { Eyebrow, Pill, ArrowGlyph } from "../components/Decor";
 import { services } from "../data/constants";
 import { useUiAnimations } from "../hooks/useUiAnimations";
 
-/* Stable display order â€” drives the prev / next service navigation. */
+/* Stable display order — drives the prev / next service navigation. */
 const ORDER = ["pre", "production", "post"];
 
 /* ------------------------------------------------------------------ *
@@ -70,7 +70,7 @@ const DisciplineRow = ({ index, item, isOpen, onToggle }) => (
       }`}
     >
       <div className="overflow-hidden">
-        <p className="text-muted text-base md:text-lg leading-relaxed pb-8 pl-[3.4rem] md:pl-[5.3rem] pr-4 md:pr-20 max-w-3xl">
+        <p className="font-script-desc text-muted text-base md:text-lg leading-relaxed pb-8 pl-[3.4rem] md:pl-[5.3rem] pr-4 md:pr-20 max-w-3xl">
           {item.desc}
         </p>
       </div>
@@ -99,7 +99,7 @@ const ServiceDetail = () => {
       <Header />
 
       {/* ---------------------------------------------------------- *
-       *  Hero â€” centered title banner over the background image
+       *  Hero — centered title banner over the background image
        * ---------------------------------------------------------- */}
       <section className="relative bg-ink text-paper overflow-hidden">
         <div className="absolute inset-0">
@@ -126,7 +126,7 @@ const ServiceDetail = () => {
         <div className="relative max-w-[1500px] mx-auto px-6 md:px-12 pt-40 md:pt-48 pb-16 md:pb-24 text-center">
           <div data-reveal="up" className="mb-6 flex justify-center">
             <Eyebrow tone="light">
-              {service.number} â€” {service.eyebrow}
+              {service.number} — {service.eyebrow}
             </Eyebrow>
           </div>
 
@@ -140,13 +140,13 @@ const ServiceDetail = () => {
       </section>
 
       {/* ---------------------------------------------------------- *
-       *  Disciplines â€” centered interactive accordion
+       *  Disciplines — centered interactive accordion
        * ---------------------------------------------------------- */}
       <section className="relative bg-paper py-20 md:py-28">
         <div className="max-w-3xl mx-auto px-6 md:px-12">
           <p
             data-reveal="up"
-            className="text-center text-muted text-lg md:text-xl leading-relaxed mb-12 md:mb-16"
+            className="font-script-desc text-center text-muted text-lg md:text-xl leading-relaxed mb-12 md:mb-16"
           >
             {service.intro}
           </p>

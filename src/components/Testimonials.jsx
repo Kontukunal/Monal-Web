@@ -123,10 +123,8 @@ const Testimonials = () => {
       id="testimonials"
       className="relative bg-ink text-paper py-24 md:py-32 overflow-hidden border-t border-white/10"
     >
-      {/* Texture + decorative asterisks */}
+      {/* Texture */}
       <div className="absolute inset-0 bg-dots-light opacity-20 pointer-events-none" />
-      <Asterisk className="absolute -top-12 -right-12 w-48 text-accent/15 hidden md:block" spin />
-      <Asterisk className="absolute -bottom-16 -left-16 w-56 text-white/[0.04] hidden md:block animate-spin-rev" />
 
       {/* Header */}
       <div className="relative max-w-[1500px] mx-auto px-6 md:px-12 flex flex-col items-center text-center gap-6 mb-14 md:mb-20">

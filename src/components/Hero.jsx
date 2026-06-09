@@ -50,13 +50,6 @@ const Hero = () => {
       {/* Hairline divider down the seam between the two panels */}
       <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-paper/20 z-10 pointer-events-none" />
 
-      {/* Floating decorative graphics */}
-      <Asterisk
-        className="absolute -top-10 -right-10 md:-top-16 md:-right-16 w-40 md:w-72 text-accent/80 hidden sm:block z-10"
-        spin
-      />
-      <Asterisk className="absolute -bottom-10 -left-10 md:-bottom-16 md:-left-16 w-36 md:w-64 text-paper/15 hidden sm:block animate-spin-rev z-10" />
-
       {/* Centred copy, overlaid on the split */}
       <div className="relative z-20 flex-1 flex items-center pt-32 pb-16">
         <div

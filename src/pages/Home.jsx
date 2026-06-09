@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
-import Hero from "../components/Hero";
 import Intro from "../components/Intro";
 import Showreel from "../components/Showreel";
 import ShowreelModal from "../components/ShowreelModal";
@@ -25,7 +24,6 @@ const Home = () => {
     <>
       <Header />
       <Intro />
-      <Hero />
       <Showreel setShowreelOpen={setShowreelOpen} />
       {showreelOpen && <ShowreelModal setShowreelOpen={setShowreelOpen} />}
       <About />

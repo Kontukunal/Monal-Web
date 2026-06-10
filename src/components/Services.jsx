@@ -33,7 +33,8 @@ const ServiceCard = ({ service, color, imgClass, num }) => (
           src={service.img}
           alt={service.title}
           loading="lazy"
-          className={`pointer-events-none absolute left-1/2 bottom-0 w-auto -translate-x-1/2 object-contain drop-shadow-[0_24px_30px_rgba(0,0,0,0.4)] transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-[1.04] ${imgClass}`}
+          style={{ "--card-glow": `${color}8C` }}
+          className={`pointer-events-none absolute left-1/2 bottom-0 w-auto -translate-x-1/2 object-contain drop-shadow-[0_24px_30px_rgba(0,0,0,0.4)] transition-[translate,scale,filter] duration-700 group-hover:-translate-y-2 group-hover:scale-[1.04] group-hover:drop-shadow-[0_32px_50px_var(--card-glow)] ${imgClass}`}
         />
         <div className="relative z-10 w-full p-5 text-white">
           <div className="flex items-end justify-between">

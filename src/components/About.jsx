@@ -31,8 +31,8 @@ const About = () => {
       className="relative bg-mist py-12 md:py-16 overflow-hidden border-t border-line"
     >
       {/* Faint dotted texture + decorative asterisks */}
-      <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
-      <Asterisk className="absolute -top-12 -left-12 w-44 text-accent/15 hidden md:block animate-spin-rev" />
+      {/* <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" /> */}
+      {/* <Asterisk className="absolute -top-12 -left-12 w-44 text-accent/15 hidden md:block animate-spin-rev" /> */}
 
       <div className="relative max-w-295 mx-auto px-6 md:px-12">
         {/* Header */}
@@ -52,7 +52,7 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           {/* Pearl on a striped hexagon plate, breaking out for a 3-D pop */}
           <div data-reveal="left" className="relative flex justify-center">
-            <div className="relative w-full max-w-sm aspect-square">
+            <div data-tilt="7" className="relative w-full max-w-sm aspect-square">
               {/* Soft warm glow */}
               <div className="absolute inset-8 rounded-full bg-tangerine/35 blur-[70px]" />
 
@@ -75,7 +75,8 @@ const About = () => {
                 src={pearl}
                 alt="Monal Pearl"
                 loading="lazy"
-                className="absolute left-1/2 -translate-x-1/2 -top-[24%] w-[110%] max-w-none z-10 drop-shadow-[0_40px_55px_rgba(20,17,30,0.5)]"
+                draggable="false"
+                className="absolute left-1/2 -translate-x-1/2 -top-[24%] w-[110%] max-w-none z-10 origin-bottom animate-dance drop-shadow-[0_40px_55px_rgba(20,17,30,0.5)] transition-[scale,filter] duration-300 hover:scale-105 hover:drop-shadow-[0_46px_65px_rgba(251,122,60,0.55)] select-none"
               />
             </div>
           </div>

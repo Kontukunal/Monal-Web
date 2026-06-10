@@ -4,30 +4,71 @@ import { services, brands } from "../data/constants";
 import { Panel } from "./Panel";
 import { Eyebrow, ArrowGlyph, Asterisk } from "./Decor";
 
-/* Per-card colour + a short outer heading, in step with the service keys. */
+/* Per-card colour plate + the popped-out character's height, in step with the
+   service keys. (GR sits a touch larger than the other two.) */
 const CARDS = [
-  { color: "#fb7a3c", heading: "Where every great frame begins." },
-  { color: "#ec4899", heading: "Where the blueprint comes alive." },
-  { color: "#5b46e8", heading: "The final, screen-ready polish." },
+  { color: "#5b46e8", imgClass: "h-80 md:h-88" },
+  { color: "#ec4899", imgClass: "h-72 md:h-80" },
+  { color: "#fb7a3c", imgClass: "h-72 md:h-80" },
 ];
+
+/* One service card: a paper tile with a compact colour plate at the bottom and
+   the character popping out the top (half in / half out) for a 3D lift. */
+const ServiceCard = ({ service, color, imgClass, num }) => (
+  <Link
+    to={`/services/${service.slug}`}
+    data-tilt="4"
+    className="group block rounded-[30px] bg-paper p-5 transition-all duration-500 hover:-translate-y-2"
+  >
+    <p className="px-2 pt-3 pb-6 text-center font-display text-2xl md:text-3xl leading-tight text-ink">
+      {service.eyebrow}
+    </p>
+
+    <div className="relative h-70 md:h-80 flex items-end">
+      <div
+        className="relative w-full rounded-[24px] h-40 md:h-44 flex items-end"
+        style={{ background: color }}
+      >
+        <img
+          src={service.img}
+          alt={service.title}
+          loading="lazy"
+          className={`pointer-events-none absolute left-1/2 bottom-0 w-auto -translate-x-1/2 object-contain drop-shadow-[0_24px_30px_rgba(0,0,0,0.4)] transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-[1.04] ${imgClass}`}
+        />
+        <div className="relative z-10 w-full p-5 text-white">
+          <div className="flex items-end justify-between">
+            <span className="font-display leading-none text-[clamp(2.2rem,5vw,3.5rem)] drop-shadow-[0_4px_14px_rgba(0,0,0,0.45)]">
+              {num}
+            </span>
+            <span className="shrink-0 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm grid place-items-center transition-all duration-300 group-hover:bg-white group-hover:text-ink">
+              <ArrowGlyph className="w-5 h-5" />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Link>
+);
 
 /* A distinct creative "plate" behind each brand logo — gradient, glow tint,
    and an accent for the decorative corner mark. Cycled across the brand list. */
 const BRAND_PLATES = [
   {
-    gradient: "linear-gradient(135deg,#5b46e8 0%,#7c5cff 100%)",
-    glow: "rgba(124,92,255,0.45)",
-    accent: "text-sun/70",
+    gradient: "linear-gradient(135deg,#fb7a3c 0%,#ffac4d 100%)",
+    glow: "rgba(251,122,60,0.45)",
+    accent: "text-violet/80",
   },
+
   {
     gradient: "linear-gradient(135deg,#ec4899 0%,#f9669f 100%)",
     glow: "rgba(236,72,153,0.45)",
     accent: "text-white/70",
   },
+
   {
-    gradient: "linear-gradient(135deg,#fb7a3c 0%,#ffac4d 100%)",
-    glow: "rgba(251,122,60,0.45)",
-    accent: "text-violet/80",
+    gradient: "linear-gradient(135deg,#5b46e8 0%,#7c5cff 100%)",
+    glow: "rgba(124,92,255,0.45)",
+    accent: "text-sun/70",
   },
 ];
 
@@ -61,60 +102,21 @@ const Services = () => {
           </p>
         </div>
 
-        {/* Three staggered number cards */}
+        {/* Three service cards */}
         <div
           data-reveal-group="up"
           className="grid items-start gap-6 md:gap-7 sm:grid-cols-2 lg:grid-cols-3"
         >
           {keys.map((k, i) => {
-            const s = services[k];
             const card = CARDS[i % CARDS.length];
-            const num = String(i + 1).padStart(2, "0");
             return (
-              <Link
+              <ServiceCard
                 key={k}
-                to={`/services/${s.slug}`}
-                data-tilt="4"
-                className={`group block rounded-[30px] bg-paper p-5 transition-all duration-500 hover:-translate-y-2 ${
-                  i === 1 ? "lg:-mt-10" : ""
-                }`}
-              >
-                <p className="px-2 pt-3 pb-6 text-center font-display text-2xl md:text-3xl leading-tight text-ink">
-                  {s.eyebrow}
-                </p>
-
-                {/* Colour block — image sits inset so the colour reads as a
-                    border, with the number laid over the image in white. */}
-                <div
-                  className="relative overflow-hidden rounded-[24px] h-70 md:h-80 p-3 flex"
-                  style={{ background: card.color }}
-                >
-                  <div className="relative flex-1 rounded-[18px] overflow-hidden transform-gpu">
-                    <img
-                      src={s.img}
-                      alt={s.title}
-                      loading="lazy"
-                      className="absolute inset-0 w-full h-full object-cover rounded-[18px] transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/15 to-black/15" />
-
-                    <div className="relative h-full p-5 flex flex-col justify-between text-white">
-                      <span className="text-sm md:text-base font-medium leading-snug max-w-[85%] drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
-                        {card.heading}
-                      </span>
-
-                      <div className="flex items-end justify-between">
-                        <span className="font-display leading-none text-[clamp(4rem,9vw,7rem)] drop-shadow-[0_4px_18px_rgba(0,0,0,0.55)]">
-                          {num}
-                        </span>
-                        <span className="shrink-0 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm grid place-items-center transition-all duration-300 group-hover:bg-white group-hover:text-ink">
-                          <ArrowGlyph className="w-5 h-5" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
+                service={services[k]}
+                color={card.color}
+                imgClass={card.imgClass}
+                num={String(i + 1).padStart(2, "0")}
+              />
             );
           })}
         </div>
@@ -170,7 +172,9 @@ const Services = () => {
                     alt={b.name}
                     loading="lazy"
                     className={`relative max-h-14 md:max-h-16 max-w-[70%] w-auto object-contain transition-transform duration-500 group-hover:scale-105 ${
-                      b.name === "Adruto" ? "scale-150 group-hover:scale-[1.6]" : ""
+                      b.name === "Adruto"
+                        ? "scale-150 group-hover:scale-[1.6]"
+                        : ""
                     }`}
                     style={
                       b.name === "The Boldeye"

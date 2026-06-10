@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Eyebrow, Pill, Asterisk } from "./Decor";
 import { prefersReducedMotion } from "../hooks/useUiAnimations";
 import mascot from "../assets/Moonies.png";
+import monkey from "../assets/MONKEY.png";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -101,11 +102,18 @@ const Hero = () => {
       <div className="absolute top-10 -right-24 w-90 h-90 rounded-full bg-accent/15 blur-[90px] pointer-events-none" />
 
       <Asterisk
-        className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-44 sm:w-60 md:w-72 lg:w-96 xl:w-md text-royal/40"
+        className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-44 sm:w-60 md:w-72 lg:w-96 xl:w-md text-royal/40"
         spin
       />
 
-      
+      <img
+        src={monkey}
+        alt=""
+        aria-hidden="true"
+        className="absolute top-0 right-0 w-40 sm:w-52 md:w-60 lg:w-72 xl:w-80 z-20 pointer-events-none select-none drop-shadow-[0_18px_26px_rgba(0,0,0,0.22)]"
+      />
+
+
       <img
         src={mascot}
         alt=""

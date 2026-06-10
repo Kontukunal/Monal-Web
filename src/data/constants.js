@@ -5,6 +5,10 @@ import wandsAndWingsJr from "../assets/Projects/W&W Jr.webp";
 import groovyTheMartian from "../assets/Projects/Groovy The Martian.webp";
 import gigglebellies from "../assets/Projects/Gigglebellies.webp";
 
+import gr from "../assets/GR.png";
+import bunty from "../assets/BUNTY.png";
+import baby from "../assets/BABY.png";
+
 import nitinThirpola from "../assets/Team/Nitin_Thirpola.webp";
 import akshayKumarSingh from "../assets/Team/Akshay_Kumar_Singh.webp";
 import anandUpadhyay from "../assets/Team/Anand_Upadhyay.webp";
@@ -105,7 +109,7 @@ export const services = {
         desc: "We find the right voices and direct talent through recording sessions, capturing performance-driven dialogue early so animation can be timed perfectly to the actors' delivery.",
       },
     ],
-    img: "https://img.freepik.com/free-photo/three-dimensional-kids-adventure-explore-moon-space_23-2151639527.jpg?semt=ais_hybrid&w=740&q=80",
+    img: gr,
   },
   production: {
     slug: "production",
@@ -149,7 +153,7 @@ export const services = {
         desc: "We craft and integrate digital effects such as fire, water, explosions, magic, and particle systems that blend seamlessly into animated or live-action footage and amplify its impact.",
       },
     ],
-    img: "https://p16-capcut-cms-sg-useast5.capcutcdn-us.com/tos-useast5-i-6rr7idwo9f-tx/1730444527482.image~tplv-6rr7idwo9f-image.image",
+    img: baby,
   },
   post: {
     slug: "post-production",
@@ -188,7 +192,7 @@ export const services = {
         desc: "We generate the final high-resolution masters in every required format, including MP4, ProRes, and DCP, delivering broadcast- and screen-ready files built to spec.",
       },
     ],
-    img: "https://static.vecteezy.com/system/resources/thumbnails/046/238/401/small/a-3d-character-illustration-for-a-childrens-book-photo.jpg",
+    img: bunty,
   },
 };
 

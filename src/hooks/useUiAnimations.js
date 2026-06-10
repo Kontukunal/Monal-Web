@@ -93,6 +93,29 @@ export function useUiAnimations() {
     /* Reduced motion: leave everything visible, skip motion setup. */
     if (reduce) return;
 
+    /* ---- Stacking panels: each one rises UP from below and "opens" over
+       the previous as you scroll into it. Scrubbed to the scroll position
+       so the reveal is gradual & smooth, and pure transform (no opacity) so
+       panels are always fully visible and stay in normal flow — all content
+       remains scrollable/readable. ---- */
+    gsap.utils.toArray("[data-stack-panel]").forEach((panel) => {
+      gsap.fromTo(
+        panel,
+        { y: 120 },
+        {
+          y: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: panel,
+            start: "top bottom",
+            end: "top 42%",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        },
+      );
+    });
+
     /* ---- Heading word reveals (SplitText) ---- */
     gsap.utils.toArray("[data-split]").forEach((el) => {
       SplitText.create(el, {

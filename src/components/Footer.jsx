@@ -148,8 +148,8 @@ const Footer = () => {
       </div>
 
       {/* Giant wordmark */}
-      <div className="relative px-4 select-none">
-        <h2 className="font-heavy text-center leading-[0.78] tracking-[0.06em] text-[23vw] text-white">
+      <div className="relative px-4 pt-12 md:pt-20 pb-10 md:pb-16 select-none">
+        <h2 className="font-roar text-center leading-[0.78] tracking-[0.06em] text-[23vw] text-white">
           MONAL
         </h2>
       </div>

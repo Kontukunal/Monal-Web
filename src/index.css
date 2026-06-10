@@ -2,6 +2,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap');
 @import "tailwindcss";
 
+/* Roar Guroes — local display face (public/fonts) for the giant
+   footer wordmark. */
+@font-face {
+  font-family: "Roar Guroes";
+  src: url("/fonts/RoarGuroes.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ------------------------------------------------------------------ *
  *  Monal Digital — "Wollo" inspired theme
  *  White canvas · vivid purple primary · playful multi-colour cards.
@@ -71,6 +81,7 @@
 .font-body { font-family: var(--font-body); }
 /* Fat, rounded, curvy display face — used for the giant footer wordmark. */
 .font-heavy { font-family: "Fredoka", system-ui, sans-serif; font-weight: 700; }
+.font-roar { font-family: "Roar Guroes", "Fredoka", system-ui, sans-serif; font-weight: 400; }
 
 /* A coloured highlight word inside a heading. */
 .text-royal { color: var(--color-royal); }
@@ -108,6 +119,14 @@
 }
 .animate-float { animation: md-float 6s ease-in-out infinite; }
 .animate-float-slow { animation: md-float 9s ease-in-out infinite; }
+
+@keyframes md-dance {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50%      { transform: translateY(-16px) rotate(2.5deg); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .animate-dance { animation: md-dance 5s ease-in-out infinite; }
+}
 
 @keyframes md-pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }

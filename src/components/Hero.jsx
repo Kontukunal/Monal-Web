@@ -21,6 +21,10 @@ const Hero = () => {
   const cardRef = useRef(null);
   const titleRef = useRef(null);
   const videoRef = useRef(null);
+  const monkeyRef = useRef(null);
+  const monkeyImgRef = useRef(null);
+  const mascotWrapRef = useRef(null);
+  const mascotImgRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
 
@@ -45,9 +49,51 @@ const Hero = () => {
     return () => document.removeEventListener("fullscreenchange", onChange);
   }, []);
 
-  useGSAP(
+  const { contextSafe } = useGSAP(
     () => {
       if (prefersReducedMotion()) return;
+
+      /* Monkey drops in on its vine, then keeps swinging from the
+         top-right corner where the vine leaves the screen. */
+      gsap
+        .timeline({ delay: 0.3 })
+        .from(monkeyRef.current, {
+          yPercent: -120,
+          rotation: 18,
+          transformOrigin: "100% 0%",
+          duration: 1.1,
+          ease: "bounce.out",
+        })
+        .to(monkeyRef.current, {
+          rotation: -4,
+          duration: 0.9,
+          ease: "sine.inOut",
+        })
+        .to(monkeyRef.current, {
+          rotation: 4,
+          duration: 1.7,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
+
+      /* Moonies peeks up from below the edge, then bobs in place. */
+      gsap
+        .timeline({ delay: 0.5 })
+        .from(mascotWrapRef.current, {
+          yPercent: 110,
+          rotation: -8,
+          transformOrigin: "50% 100%",
+          duration: 0.9,
+          ease: "back.out(1.6)",
+        })
+        .to(mascotWrapRef.current, {
+          y: -10,
+          duration: 1.9,
+          ease: "sine.inOut",
+          yoyo: true,
+          repeat: -1,
+        });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -90,6 +136,50 @@ const Hero = () => {
     { scope: rootRef },
   );
 
+  /* Monkey bounces down its vine on hover, springs back on leave. */
+  const onMonkeyEnter = contextSafe(() => {
+    if (prefersReducedMotion()) return;
+    gsap.to(monkeyImgRef.current, {
+      scale: 1.07,
+      y: 14,
+      transformOrigin: "100% 0%",
+      duration: 0.45,
+      ease: "back.out(2.5)",
+    });
+  });
+
+  const onMonkeyLeave = contextSafe(() => {
+    if (prefersReducedMotion()) return;
+    gsap.to(monkeyImgRef.current, {
+      scale: 1,
+      y: 0,
+      duration: 0.6,
+      ease: "elastic.out(1, 0.5)",
+    });
+  });
+
+  /* Moonies gets excited on hover: leans in, scales up, wiggles. */
+  const onMascotEnter = contextSafe(() => {
+    if (prefersReducedMotion()) return;
+    gsap.to(mascotImgRef.current, {
+      scale: 1.08,
+      rotation: 5,
+      transformOrigin: "50% 100%",
+      duration: 0.45,
+      ease: "back.out(2.5)",
+    });
+  });
+
+  const onMascotLeave = contextSafe(() => {
+    if (prefersReducedMotion()) return;
+    gsap.to(mascotImgRef.current, {
+      scale: 1,
+      rotation: 0,
+      duration: 0.55,
+      ease: "elastic.out(1, 0.55)",
+    });
+  });
+
   return (
     <section
       id="home"
@@ -101,25 +191,43 @@ const Hero = () => {
       <div className="absolute -top-32 -left-32 w-105 h-105 rounded-full bg-violet/20 blur-[90px] pointer-events-none" />
       <div className="absolute top-10 -right-24 w-90 h-90 rounded-full bg-accent/15 blur-[90px] pointer-events-none" />
 
-      <Asterisk
+      {/* <Asterisk
         className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-44 sm:w-60 md:w-72 lg:w-96 xl:w-md text-royal/40"
         spin
-      />
+      /> */}
 
-      <img
-        src={monkey}
-        alt=""
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-40 sm:w-52 md:w-60 lg:w-72 xl:w-80 z-20 pointer-events-none select-none drop-shadow-[0_18px_26px_rgba(0,0,0,0.22)]"
-      />
+      <div
+        ref={monkeyRef}
+        onMouseEnter={onMonkeyEnter}
+        onMouseLeave={onMonkeyLeave}
+        className="absolute top-0 right-0 w-40 sm:w-52 md:w-60 lg:w-72 xl:w-80 z-20 select-none will-change-transform"
+      >
+        <img
+          ref={monkeyImgRef}
+          src={monkey}
+          alt=""
+          aria-hidden="true"
+          draggable="false"
+          className="w-full drop-shadow-[0_18px_26px_rgba(0,0,0,0.22)] transition-[filter] duration-300 hover:drop-shadow-[0_26px_40px_rgba(0,0,0,0.35)] will-change-transform"
+        />
+      </div>
 
 
-      <img
-        src={mascot}
-        alt=""
-        aria-hidden="true"
-        className="absolute bottom-0 left-0 -translate-x-[27%] w-52 sm:w-64 md:w-72 lg:w-80 xl:w-104 z-20 pointer-events-none select-none drop-shadow-[0_18px_26px_rgba(0,0,0,0.22)]"
-      />
+      <div
+        ref={mascotWrapRef}
+        onMouseEnter={onMascotEnter}
+        onMouseLeave={onMascotLeave}
+        className="absolute bottom-0 left-0 -translate-x-[27%] w-52 sm:w-64 md:w-72 lg:w-80 xl:w-104 z-20 select-none will-change-transform"
+      >
+        <img
+          ref={mascotImgRef}
+          src={mascot}
+          alt=""
+          aria-hidden="true"
+          draggable="false"
+          className="w-full drop-shadow-[0_18px_26px_rgba(0,0,0,0.22)] transition-[filter] duration-300 hover:drop-shadow-[0_26px_40px_rgba(37,99,235,0.35)] will-change-transform"
+        />
+      </div>
 
       {/* ---- Title ---- */}
       <div
@@ -136,7 +244,7 @@ const Hero = () => {
           Bringing <span className="text-royal">vision</span> to life.
         </h1>
 
-        
+
       </div>
 
       {/* Colourful card layers tucked BEHIND the video card (image look) */}

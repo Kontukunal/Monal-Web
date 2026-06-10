@@ -1,6 +1,15 @@
 import React from "react";
-import { projects } from "../data/constants";
-import { Eyebrow, Asterisk, Pill } from "./Decor";
+import { Eyebrow, Asterisk } from "./Decor";
+import pearl from "../assets/Pearl.png";
+
+/* Flat-top hexagon mask for the image plate. */
+const HEX_CLIP = "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)";
+
+/* Diagonal stripe texture overlay. */
+const STRIPES = {
+  backgroundImage:
+    "repeating-linear-gradient(45deg, rgba(255,255,255,0.14) 0px, rgba(255,255,255,0.14) 2px, transparent 2px, transparent 16px)",
+};
 
 const FEATURES = [
   { title: "Original IP", desc: "developed and owned in-house." },
@@ -9,28 +18,25 @@ const FEATURES = [
 ];
 
 const STATS = [
-  { n: "10", suffix: "+", label: "Years of craft" },
-  { n: "100", suffix: "+", label: "Artists & creators" },
-  { n: "25", suffix: "M+", label: "Subscribers reached" },
-  { n: "40", suffix: "+", label: "Projects delivered" },
+  { n: "10", suffix: "+", label: "Years of craft", color: "#5b46e8" },
+  { n: "25", suffix: "M+", label: "Subscribers reached", color: "#ec4899" },
+  { n: "200", suffix: "+", label: "Projects delivered", color: "#fb7a3c" },
+  { n: "12", suffix: "+", label: "Industry awards", color: "#3b82f6" },
 ];
-
-const imgMain = projects[2].img; // Wands And Wings key art
-const imgSide = projects[0].img; // Zappy Toons key art
 
 const About = () => {
   return (
     <section
       id="about"
-      className="relative bg-mist py-24 md:py-36 overflow-hidden border-t border-line"
+      className="relative bg-mist py-12 md:py-16 overflow-hidden border-t border-line"
     >
       {/* Faint dotted texture + decorative asterisks */}
       <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" />
       <Asterisk className="absolute -top-12 -left-12 w-44 text-accent/15 hidden md:block animate-spin-rev" />
 
-      <div className="relative max-w-[1500px] mx-auto px-6 md:px-12">
+      <div className="relative max-w-295 mx-auto px-6 md:px-12">
         {/* Header */}
-        <div className="mb-16 md:mb-24 flex flex-col items-center text-center">
+        <div className="mb-10 md:mb-12 flex flex-col items-center text-center">
           <div data-reveal="up" className="mb-6">
             <Eyebrow>About Monal</Eyebrow>
           </div>
@@ -38,63 +44,44 @@ const About = () => {
             data-split
             className="headline-vibrant font-display capitalize text-[clamp(2rem,7.5vw,7rem)] leading-[0.86] tracking-[-0.04em]"
           >
-            Who we are.
+            Who we <span className="text-royal">are.</span>
           </h2>
         </div>
 
-        {/* Main split — image collage + story */}
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Image collage */}
-          <div data-reveal="left" className="relative">
-            {/* Main image */}
-            <div className="relative aspect-4/5 rounded-[28px] overflow-hidden ring-1 ring-line shadow-[0_40px_90px_-40px_rgba(12,12,12,0.45)] bg-ink">
+        {/* Main split — Pearl image (left) + story & features (right) */}
+        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          {/* Pearl on a striped hexagon plate, breaking out for a 3-D pop */}
+          <div data-reveal="left" className="relative flex justify-center">
+            <div className="relative w-full max-w-sm aspect-square">
+              {/* Soft warm glow */}
+              <div className="absolute inset-8 rounded-full bg-tangerine/35 blur-[70px]" />
+
+              {/* Hexagon plate — warm gradient + diagonal stripes */}
+              <div
+                className="absolute inset-0 bg-linear-to-br from-tangerine via-accent to-sun shadow-[0_50px_100px_-30px_rgba(251,122,60,0.6)]"
+                style={{ clipPath: HEX_CLIP }}
+              >
+                <div className="absolute inset-0" style={STRIPES} />
+                <div className="absolute -top-6 -right-6 w-44 h-44 rounded-full bg-white/15 blur-2xl" />
+              </div>
+
+              {/* Floating accents */}
+              <span className="absolute top-8 right-10 w-4 h-4 rounded-full bg-royal animate-float" />
+              <span className="absolute bottom-10 left-8 w-3.5 h-3.5 rounded-md rotate-12 bg-sky animate-float-slow" />
+              <Asterisk className="absolute -bottom-2 right-8 w-14 text-royal z-10" spin />
+
+              {/* Pearl — bigger, breaks out above the hexagon for depth */}
               <img
-                src={imgMain}
-                alt="Monal Digital key art"
+                src={pearl}
+                alt="Monal Pearl"
                 loading="lazy"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent" />
-              <div className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-full bg-white/15 backdrop-blur-md border border-white/20 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white">
-                <Asterisk className="w-3 h-3 text-accent" spin />
-                In-house original
-              </div>
-            </div>
-
-            {/* Overlapping secondary image */}
-            <div className="absolute -bottom-8 -right-5 md:-right-8 w-36 md:w-52 aspect-3/4 rounded-[22px] overflow-hidden ring-[6px] ring-mist shadow-[0_30px_60px_-25px_rgba(12,12,12,0.5)] hidden sm:block">
-              <img
-                src={imgSide}
-                alt="Monal Digital production still"
-                loading="lazy"
-                className="w-full h-full object-cover"
+                className="absolute left-1/2 -translate-x-1/2 -top-[24%] w-[110%] max-w-none z-10 drop-shadow-[0_40px_55px_rgba(20,17,30,0.5)]"
               />
             </div>
-
-            {/* Floating stat badge */}
-            <div className="absolute -top-6 -left-3 md:-left-8 bg-paper border border-line rounded-2xl px-5 py-4 shadow-[0_24px_50px_-24px_rgba(12,12,12,0.4)] animate-float">
-              <div className="font-display text-3xl md:text-4xl leading-none text-ink">
-                10+
-              </div>
-              <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-muted">
-                Years of magic
-              </div>
-            </div>
-
-            <Asterisk className="absolute -top-8 right-8 w-14 text-accent hidden md:block" spin />
           </div>
 
-          {/* Story */}
-          <div data-reveal="right" className="flex flex-col">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-ink mb-5 inline-flex items-center gap-2">
-              <Asterisk className="w-3.5 h-3.5 text-accent" spin />
-              Our Story
-            </p>
-            <h3 className="font-display capitalize text-[clamp(2rem,4vw,4rem)] leading-[0.95] tracking-[-0.03em] mb-7">
-              We turn imagination into{" "}
-              <span className="headline-vibrant">moving art.</span>
-            </h3>
-
+          {/* Story + feature points */}
+          <div data-reveal="right" className="flex flex-col justify-center">
             <p className="font-script-desc text-muted text-lg leading-relaxed mb-5 max-w-xl">
               Founded in 2015 in Haldwani, Monal Digital is a premium animation
               studio crafting cinematic stories, original IPs, and next-gen
@@ -107,12 +94,14 @@ const About = () => {
               screens.
             </p>
 
-            {/* Feature points */}
-            <ul className="space-y-3.5 mb-10">
+            <ul className="space-y-3">
               {FEATURES.map((f) => (
-                <li key={f.title} className="flex items-start gap-3.5">
-                  <span className="mt-0.5 grid place-items-center w-6 h-6 rounded-full bg-accent text-ink shrink-0">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <li
+                  key={f.title}
+                  className="group flex items-center gap-4 rounded-2xl bg-paper border border-line px-4 py-3.5 transition-all duration-300 hover:border-royal/30 hover:shadow-[0_16px_40px_-26px_rgba(12,12,12,0.5)]"
+                >
+                  <span className="grid place-items-center w-9 h-9 rounded-xl bg-royal/12 text-royal shrink-0 transition-colors duration-300 group-hover:bg-royal group-hover:text-white">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   </span>
@@ -123,35 +112,37 @@ const About = () => {
                 </li>
               ))}
             </ul>
-
-            <div>
-              <Pill as="a" href="#team">
-                Meet the team
-              </Pill>
-            </div>
-
-            {/* Stats */}
-            <div
-              data-reveal-group="up"
-              className="mt-12 grid grid-cols-2 gap-x-6 gap-y-9 border-t border-line pt-10"
-            >
-              {STATS.map((s) => (
-                <div key={s.label} className="text-left">
-                  <div
-                    data-counter={s.n}
-                    data-counter-suffix={s.suffix}
-                    className="font-display text-[clamp(2.2rem,4.5vw,3.4rem)] leading-none text-ink"
-                  >
-                    {s.n}
-                    {s.suffix}
-                  </div>
-                  <div className="mt-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
+        </div>
+
+        {/* Stats — full-width band */}
+        <div
+          data-reveal-group="up"
+          className="mt-12 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4"
+        >
+          {STATS.map((s) => (
+            <div
+              key={s.label}
+              className="group relative overflow-hidden rounded-2xl bg-paper border border-line p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_48px_-26px_rgba(12,12,12,0.45)]"
+            >
+              <span
+                className="absolute left-0 top-0 h-full w-1 transition-all duration-300 group-hover:w-1.5"
+                style={{ background: s.color }}
+              />
+              <div
+                data-counter={s.n}
+                data-counter-suffix={s.suffix}
+                className="font-display text-[clamp(2.2rem,4.5vw,3.2rem)] leading-none"
+                style={{ color: s.color }}
+              >
+                {s.n}
+                {s.suffix}
+              </div>
+              <div className="mt-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
+                {s.label}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

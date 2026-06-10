@@ -6,24 +6,21 @@ import { prefersReducedMotion } from "../hooks/useUiAnimations";
 import { Pill, ArrowGlyph } from "./Decor";
 import logo from "../assets/Monal_Logo.png";
 
-/* Root-relative hash targets so the nav works from any route — on the
-   landing page they smooth-scroll, from a sub-page they return home. */
 const NAV = [
   ["Home", "/#home"],
-  ["About Us", "/#about"],
+  ["About", "/#about"],
   ["Work", "/#work"],
   ["Solutions", "/#services"],
-
   ["Team", "/#team"],
 ];
 
 const NavLink = ({ href, children }) => (
   <Link
     to={href}
-    className="group relative font-script text-2xl leading-none text-ink/60 hover:text-ink transition-colors"
+    className="group relative text-[15px] font-medium text-ink/70 hover:text-ink transition-colors"
   >
     {children}
-    <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-accent transition-all duration-300 group-hover:w-full" />
+    <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-royal rounded-full transition-all duration-300 group-hover:w-full" />
   </Link>
 );
 
@@ -43,12 +40,12 @@ const Header = () => {
     () => {
       if (prefersReducedMotion()) return;
       gsap.from("[data-header-item]", {
-        y: -26,
+        y: -24,
         opacity: 0,
         duration: 0.8,
         ease: "power3.out",
         stagger: 0.09,
-        delay: 0.15,
+        delay: 0.2,
       });
     },
     { scope: rootRef },
@@ -57,11 +54,15 @@ const Header = () => {
   return (
     <header
       ref={rootRef}
-      className={`fixed top-0 left-0 w-full z-60 bg-paper transition-all duration-500 ${
-        isScrolled ? "py-3 border-b border-line" : "py-6"
-      }`}
+      className="fixed top-0 left-0 w-full z-100 px-4 pt-4 md:pt-5"
     >
-      <div className="max-w-[1500px] mx-auto px-6 md:px-12 flex justify-between items-center">
+      <div
+        className={`max-w-300 mx-auto flex justify-between items-center gap-4 rounded-full border border-line bg-paper/85 backdrop-blur-xl pl-5 pr-2.5 py-2.5 transition-all duration-500 ${
+          isScrolled
+            ? "shadow-[0_22px_55px_-25px_rgba(20,17,30,0.4)] bg-paper/95"
+            : "shadow-[0_14px_40px_-28px_rgba(20,17,30,0.28)]"
+        }`}
+      >
         {/* Logo */}
         <Link
           to="/#home"
@@ -84,7 +85,10 @@ const Header = () => {
         </Link>
 
         {/* Center nav */}
-        <nav data-header-item className="hidden lg:flex items-center gap-9">
+        <nav
+          data-header-item
+          className="hidden lg:flex items-center gap-9 absolute left-1/2 -translate-x-1/2"
+        >
           {NAV.map(([label, href]) => (
             <NavLink key={href} href={href}>
               {label}
@@ -95,7 +99,7 @@ const Header = () => {
         {/* CTA + mobile toggle */}
         <div data-header-item className="flex items-center gap-3">
           <div className="hidden lg:block">
-            <Pill as={Link} to="/#contact">
+            <Pill as={Link} to="/#contact" variant="dark" magnetic={false}>
               Get in touch
             </Pill>
           </div>
@@ -125,7 +129,7 @@ const Header = () => {
 
       {/* Mobile menu */}
       {open && (
-        <div className="lg:hidden mx-4 mt-3 rounded-3xl bg-ink text-paper p-7 flex flex-col gap-1 animate-fade-in">
+        <div className="lg:hidden max-w-300 mx-auto mt-3 rounded-3xl bg-ink text-paper p-7 flex flex-col gap-1 animate-fade-in">
           {NAV.map(([label, href]) => (
             <Link
               key={href}
@@ -133,16 +137,16 @@ const Header = () => {
               onClick={() => setOpen(false)}
               className="group flex items-center justify-between py-3 border-b border-white/10 last:border-0"
             >
-              <span className="font-script text-4xl leading-none">
+              <span className="font-display text-3xl leading-none">
                 {label}
               </span>
-              <ArrowGlyph className="w-5 h-5 text-white/40 group-hover:text-accent transition-colors" />
+              <ArrowGlyph className="w-5 h-5 text-white/40 group-hover:text-royal transition-colors" />
             </Link>
           ))}
           <Pill
             as={Link}
             to="/#contact"
-            variant="accent"
+            variant="primary"
             magnetic={false}
             onClick={() => setOpen(false)}
             className="mt-5 justify-center"

@@ -10,7 +10,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
  *  Shared graphic + UI primitives — the visual language of the site.
  * ------------------------------------------------------------------ */
 
-/* Schbang-style radiant asterisk / burst flower */
+/* Radiant asterisk / burst flower */
 export const Asterisk = ({ className = "", spin = false, petals = 12 }) => (
   <svg
     viewBox="0 0 100 100"
@@ -64,37 +64,49 @@ export const ArrowGlyph = ({ className = "" }) => (
   </svg>
 );
 
-/* Section eyebrow label with spinning accent asterisk */
-export const Eyebrow = ({ children, className = "" }) => (
-  <span
-    className={`inline-flex items-center gap-2.5 font-script text-2xl leading-none text-accent ${className}`}
-  >
-    <Asterisk className="w-3.5 h-3.5 text-accent" spin />
-    {children}
-  </span>
-);
+/* Section eyebrow — a small rounded chip with a coloured dot.
+   tone "light" sits on light backgrounds, "dark" on dark panels. */
+export const Eyebrow = ({
+  children,
+  className = "",
+  dot = "bg-royal",
+  tone = "light",
+}) => {
+  const tones = {
+    light: "bg-mist border-line text-ink/70",
+    dark: "bg-white/10 border-white/20 text-white/80",
+  };
+  return (
+    <span
+      className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] ${tones[tone]} ${className}`}
+    >
+      <span className={`w-2 h-2 rounded-full ${dot}`} />
+      {children}
+    </span>
+  );
+};
 
-/* Pill button — the single CTA component across the site */
+/* Pill button — the single CTA component across the site.
+   variants: primary (purple) · dark (black) · light (white/outline) · ghost (on dark) */
 export const Pill = ({
   as = "button",
   children,
   className = "",
-  variant = "dark",
+  variant = "primary",
   magnetic = true,
   ...rest
 }) => {
   const Tag = as;
   const styles = {
-    dark: "bg-pill-vibrant text-paper",
-    light: "bg-paper text-ink border border-line hover:bg-ink hover:text-paper",
-    accent: "bg-pill-vibrant text-paper",
-    ghost:
-      "bg-transparent text-paper border border-white/25 hover:bg-paper hover:text-ink",
+    primary: "bg-royal text-white hover:bg-violet shadow-[0_14px_30px_-12px_rgba(91,70,232,0.7)]",
+    dark: "bg-ink text-white hover:bg-royal",
+    light: "bg-paper text-ink border border-line hover:border-ink/30",
+    ghost: "bg-transparent text-white border border-white/35 hover:bg-white hover:text-ink",
   };
   return (
     <Tag
       {...(magnetic ? { "data-magnetic": "0.3" } : {})}
-      className={`group inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-[12px] font-semibold uppercase tracking-[0.16em] transition-colors duration-300 ${styles[variant]} ${className}`}
+      className={`group inline-flex items-center gap-2.5 rounded-full px-7 py-3.5 text-[13px] font-semibold tracking-[0.02em] transition-all duration-300 ${styles[variant]} ${className}`}
       {...rest}
     >
       {children}
@@ -125,7 +137,6 @@ export const Marquee = ({
         repeat: -1,
       });
 
-      /* Boost speed with scroll velocity, then ease back to rest. */
       let current = 1;
       let target = 1;
       const tick = () => {
@@ -147,7 +158,7 @@ export const Marquee = ({
         tween.kill();
       };
     },
-    { scope: trackRef }
+    { scope: trackRef },
   );
 
   return (

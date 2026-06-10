@@ -1,197 +1,190 @@
-﻿import React, { useState, useRef } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-import { prefersReducedMotion } from "../hooks/useUiAnimations";
-import { services } from "../data/constants";
-import { Eyebrow, ArrowGlyph } from "./Decor";
+import { services, brands } from "../data/constants";
+import { Panel } from "./Panel";
+import { Eyebrow, ArrowGlyph, Asterisk } from "./Decor";
+
+/* Per-card colour + a short outer heading, in step with the service keys. */
+const CARDS = [
+  { color: "#fb7a3c", heading: "Where every great frame begins." },
+  { color: "#ec4899", heading: "Where the blueprint comes alive." },
+  { color: "#5b46e8", heading: "The final, screen-ready polish." },
+];
+
+/* A distinct creative "plate" behind each brand logo — gradient, glow tint,
+   and an accent for the decorative corner mark. Cycled across the brand list. */
+const BRAND_PLATES = [
+  {
+    gradient: "linear-gradient(135deg,#5b46e8 0%,#7c5cff 100%)",
+    glow: "rgba(124,92,255,0.45)",
+    accent: "text-sun/70",
+  },
+  {
+    gradient: "linear-gradient(135deg,#ec4899 0%,#f9669f 100%)",
+    glow: "rgba(236,72,153,0.45)",
+    accent: "text-white/70",
+  },
+  {
+    gradient: "linear-gradient(135deg,#fb7a3c 0%,#ffac4d 100%)",
+    glow: "rgba(251,122,60,0.45)",
+    accent: "text-violet/80",
+  },
+];
 
 const Services = () => {
   const keys = Object.keys(services);
-  const [active, setActive] = useState(keys[0]);
-  const sliderRef = useRef(null);
-
-  /* Re-staggers the expanded panel content whenever it changes. */
-  useGSAP(
-    () => {
-      if (prefersReducedMotion()) return;
-      gsap.from("[data-svc-line]", {
-        y: 28,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.07,
-        ease: "power3.out",
-        delay: 0.1,
-      });
-    },
-    { dependencies: [active], scope: sliderRef }
-  );
-
-  const Features = ({ list, tone }) => (
-    <div className="grid grid-cols-2 gap-x-8 gap-y-2.5 max-w-md">
-      {list.map((f, i) => (
-        <div
-          key={i}
-          className={`flex items-center gap-2.5 text-sm font-medium ${tone}`}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-current shrink-0" />
-          {f}
-        </div>
-      ))}
-    </div>
-  );
 
   return (
-    <section id="services" className="relative bg-paper py-24 md:py-36">
-      <div className="max-w-[1500px] mx-auto px-6 md:px-12">
+    <Panel id="services" bg="bg-ink">
+      <div className="relative max-w-[1200px] mx-auto px-6 md:px-12 py-24 md:py-28 w-full">
         {/* Header */}
-        <div className="flex flex-col items-center text-center gap-8 mb-12 md:mb-16">
-          <div className="flex flex-col items-center">
-            <div data-reveal="up" className="mb-6">
-              <Eyebrow>Capabilities</Eyebrow>
-            </div>
-            <h2
-              data-split
-              className="headline-vibrant font-display capitalize text-[clamp(1.9rem,7.5vw,7rem)] leading-[0.86] tracking-[-0.04em]"
-            >
-              What we create.
-            </h2>
+        <div className="flex flex-col items-center text-center gap-5 mb-14 md:mb-20">
+          <div data-reveal="up">
+            <Eyebrow tone="dark" dot="bg-sun">
+              Services
+            </Eyebrow>
           </div>
+          <h2
+            data-reveal="up"
+            data-reveal-delay="0.08"
+            className="font-display capitalize text-white text-[clamp(2rem,7vw,5.5rem)] leading-[0.94] max-w-3xl"
+          >
+            What we <span className="text-violet">create.</span>
+          </h2>
           <p
             data-reveal="up"
-            data-reveal-delay="0.1"
-            className="font-script-desc text-muted max-w-sm leading-relaxed"
+            data-reveal-delay="0.14"
+            className="text-white/60 max-w-md leading-relaxed"
           >
-            From the first sketch to the final cut, we craft every frame with
-            intention and turn bold ideas into stories worth watching.
+            From the first sketch to the final cut — three studios of craft,
+            working as one pipeline.
           </p>
         </div>
 
-        {/* Desktop expanding slider */}
+        {/* Three staggered number cards */}
         <div
-          ref={sliderRef}
-          data-reveal="up"
-          className="hidden md:flex gap-2.5 h-[74vh]"
+          data-reveal-group="up"
+          className="grid items-start gap-6 md:gap-7 sm:grid-cols-2 lg:grid-cols-3"
         >
           {keys.map((k, i) => {
             const s = services[k];
-            const isActive = active === k;
+            const card = CARDS[i % CARDS.length];
+            const num = String(i + 1).padStart(2, "0");
             return (
               <Link
                 key={k}
                 to={`/services/${s.slug}`}
-                onMouseEnter={() => setActive(k)}
-                style={{ flexBasis: 0 }}
-                className={`group relative block overflow-hidden rounded-[18px] cursor-pointer min-w-[84px] transition-[flex-grow] duration-700 ease-[cubic-bezier(.65,0,.2,1)] ${
-                  isActive ? "grow-[3.6]" : "grow"
+                data-tilt="4"
+                className={`group block rounded-[30px] bg-paper p-5 transition-all duration-500 hover:-translate-y-2 ${
+                  i === 1 ? "lg:-mt-10" : ""
                 }`}
               >
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
-                    isActive ? "scale-100" : "scale-110 grayscale"
-                  }`}
-                />
+                <p className="px-2 pt-3 pb-6 text-center font-display text-2xl md:text-3xl leading-tight text-ink">
+                  {s.eyebrow}
+                </p>
+
+                {/* Colour block — image sits inset so the colour reads as a
+                    border, with the number laid over the image in white. */}
                 <div
-                  className={`absolute inset-0 transition-colors duration-500 ${
-                    isActive ? "bg-accent/90" : "bg-ink/75"
-                  }`}
-                />
-
-                {/* Index */}
-                <span
-                  className={`absolute top-6 left-6 text-[12px] font-bold uppercase tracking-[0.2em] ${
-                    isActive ? "text-ink/55" : "text-white/55"
-                  }`}
+                  className="relative overflow-hidden rounded-[24px] h-70 md:h-80 p-3 flex"
+                  style={{ background: card.color }}
                 >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                  <div className="relative flex-1 rounded-[18px] overflow-hidden transform-gpu">
+                    <img
+                      src={s.img}
+                      alt={s.title}
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover rounded-[18px] transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/65 via-black/15 to-black/15" />
 
-                {/* Collapsed vertical title */}
-                {!isActive && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="font-display capitalize text-3xl tracking-tight text-white [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
-                      {s.title}
-                    </span>
-                  </div>
-                )}
-
-                {/* Expanded content */}
-                {isActive && (
-                  <div className="absolute inset-0 flex flex-col justify-end p-8 lg:p-12 text-ink">
-                    <div className="flex items-end justify-between gap-6">
-                      <div className="max-w-xl">
-                        <h3
-                          data-svc-line
-                          className="font-display capitalize text-[clamp(2rem,3.4vw,3.8rem)] leading-[0.92] tracking-[-0.03em] mb-5"
-                        >
-                          {s.title}
-                        </h3>
-                        <p
-                          data-svc-line
-                          className="font-script-desc text-ink/75 text-base lg:text-lg leading-relaxed mb-7 max-w-md"
-                        >
-                          {s.desc}
-                        </p>
-                        <div data-svc-line>
-                          <Features list={s.features} tone="text-ink/85" />
-                        </div>
-                      </div>
-                      <span
-                        data-svc-line
-                        data-magnetic="0.3"
-                        className="shrink-0 w-16 h-16 rounded-full bg-ink text-paper grid place-items-center group-hover:bg-paper group-hover:text-ink transition-colors"
-                        aria-hidden="true"
-                      >
-                        <ArrowGlyph className="w-6 h-6" />
+                    <div className="relative h-full p-5 flex flex-col justify-between text-white">
+                      <span className="text-sm md:text-base font-medium leading-snug max-w-[85%] drop-shadow-[0_2px_8px_rgba(0,0,0,0.6)]">
+                        {card.heading}
                       </span>
+
+                      <div className="flex items-end justify-between">
+                        <span className="font-display leading-none text-[clamp(4rem,9vw,7rem)] drop-shadow-[0_4px_18px_rgba(0,0,0,0.55)]">
+                          {num}
+                        </span>
+                        <span className="shrink-0 w-11 h-11 rounded-full bg-white/20 backdrop-blur-sm grid place-items-center transition-all duration-300 group-hover:bg-white group-hover:text-ink">
+                          <ArrowGlyph className="w-5 h-5" />
+                        </span>
+                      </div>
                     </div>
                   </div>
-                )}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Mobile stacked cards */}
-        <div data-reveal-group="up" className="md:hidden space-y-5">
-          {keys.map((k, i) => {
-            const s = services[k];
-            return (
-              <Link
-                key={k}
-                to={`/services/${s.slug}`}
-                className="relative overflow-hidden rounded-[18px] min-h-[440px] flex flex-col justify-end p-7"
-              >
-                <img
-                  src={s.img}
-                  alt={s.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-ink/82" />
-                <div className="relative text-paper">
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
-                    {String(i + 1).padStart(2, "0")} — Capability
-                  </span>
-                  <h3 className="font-display capitalize text-4xl tracking-tight mt-3 mb-4">
-                    {s.title}
-                  </h3>
-                  <p className="font-script-desc text-white/70 leading-relaxed mb-6">
-                    {s.desc}
-                  </p>
-                  <Features list={s.features} tone="text-white/80" />
-                  <span className="mt-7 inline-flex items-center gap-2.5 rounded-full bg-accent text-ink px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.16em]">
-                    Explore services
-                    <ArrowGlyph className="w-3.5 h-3.5" />
-                  </span>
                 </div>
               </Link>
             );
           })}
         </div>
+
+        {/* ---- Trusted by: creative brand plates ---- */}
+        <div className="mt-24 md:mt-32">
+          <div className="flex flex-col items-center text-center gap-4 mb-12 md:mb-16">
+            <div data-reveal="up">
+              <Eyebrow tone="dark" dot="bg-accent">
+                Our Partners
+              </Eyebrow>
+            </div>
+            <h3
+              data-reveal="up"
+              data-reveal-delay="0.08"
+              className="font-display capitalize text-white text-[clamp(1.6rem,4.5vw,3rem)] leading-[1.02] max-w-2xl"
+            >
+              Trusted by studios &amp; networks{" "}
+              <span className="text-violet">worldwide.</span>
+            </h3>
+          </div>
+
+          <div
+            data-reveal-group="up"
+            className="grid gap-6 md:gap-7 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {brands.map((b, i) => {
+              const plate = BRAND_PLATES[i % BRAND_PLATES.length];
+              return (
+                <div
+                  key={b.name}
+                  data-tilt="4"
+                  className={`group relative overflow-hidden rounded-[28px] p-8 md:p-9 min-h-52 flex items-center justify-center transition-all duration-500 hover:-translate-y-2 ${
+                    i === 1 ? "lg:-mt-8" : ""
+                  }`}
+                  style={{
+                    background: plate.gradient,
+                    boxShadow: `0 26px 60px -28px ${plate.glow}`,
+                  }}
+                >
+                  {/* Decorative creative layers */}
+                  <div className="absolute inset-0 bg-grid opacity-20 pointer-events-none" />
+                  <div className="absolute -top-10 -right-10 w-36 h-36 rounded-full bg-white/15 blur-2xl pointer-events-none transition-transform duration-700 group-hover:scale-125" />
+                  <div className="absolute -bottom-12 -left-8 w-32 h-32 rounded-full bg-black/15 blur-2xl pointer-events-none" />
+                  <span className="absolute top-5 left-6 w-2.5 h-2.5 rounded-full bg-white/40" />
+                  <Asterisk
+                    className={`absolute bottom-5 right-6 w-7 ${plate.accent} transition-transform duration-700 group-hover:rotate-90`}
+                  />
+
+                  {/* Logo */}
+                  <img
+                    src={b.logo}
+                    alt={b.name}
+                    loading="lazy"
+                    className={`relative max-h-14 md:max-h-16 max-w-[70%] w-auto object-contain transition-transform duration-500 group-hover:scale-105 ${
+                      b.name === "Adruto" ? "scale-150 group-hover:scale-[1.6]" : ""
+                    }`}
+                    style={
+                      b.name === "The Boldeye"
+                        ? { filter: "brightness(0) invert(1)" }
+                        : undefined
+                    }
+                  />
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
-    </section>
+    </Panel>
   );
 };
 

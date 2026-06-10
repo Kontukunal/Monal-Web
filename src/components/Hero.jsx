@@ -1,121 +1,249 @@
-import React from "react";
-import { Asterisk, Pill, ArrowGlyph, Marquee } from "./Decor";
-import { VerticalLoop } from "./VerticalLoop";
-import { projects } from "../data/constants";
+import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { useGSAP } from "@gsap/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Eyebrow, Pill, Asterisk } from "./Decor";
+import { prefersReducedMotion } from "../hooks/useUiAnimations";
+import mascot from "../assets/Moonies.png";
 
-const reelItems = [
-  "2D Animation",
-  "3D / CGI",
-  "VFX",
-  "Motion Design",
-  "IP Development",
-];
-/* Repeat enough times that a single marquee copy always exceeds viewport width,
-   so the loop never reveals empty space at the reset point. */
-const reel = Array.from({ length: 4 }, () => reelItems).flat();
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
-/* Split the project showcase across the two halves so each side rotates
-   through a distinct set of stills rather than mirroring the other. */
-const leftSlides = projects.filter((_, i) => i % 2 === 0);
-const rightSlides = projects.filter((_, i) => i % 2 === 1);
+const VIDEO_SRC = "/showreel/Showreel.mp4";
+const VIDEO_POSTER = "/showreel/Showreel-poster.webp";
+
+const CLIP_REST = "inset(42% 17% 0% 17% round 44px)";
+const CLIP_FULL = "inset(0% 0% 0% 0% round 0px)";
 
 const Hero = () => {
+  const rootRef = useRef(null);
+  const cardRef = useRef(null);
+  const titleRef = useRef(null);
+  const videoRef = useRef(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+
+  const toggleFullscreen = () => {
+    if (document.fullscreenElement) {
+      document.exitFullscreen?.();
+    } else {
+      videoRef.current?.requestFullscreen?.();
+    }
+  };
+
+  const toggleMute = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = !v.muted;
+    setIsMuted(v.muted);
+  };
+
+  React.useEffect(() => {
+    const onChange = () => setIsFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener("fullscreenchange", onChange);
+    return () => document.removeEventListener("fullscreenchange", onChange);
+  }, []);
+
+  useGSAP(
+    () => {
+      if (prefersReducedMotion()) return;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: "top top",
+          end: "+=150%",
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      /* Card expands from the resting card window to a full-bleed cover. */
+      tl.fromTo(
+        cardRef.current,
+        { clipPath: CLIP_REST, rotation: -2 },
+        { clipPath: CLIP_FULL, rotation: 0, ease: "none", duration: 1 },
+        0,
+      );
+
+      /* Colourful layers behind it slide down & fade as the card grows. */
+      tl.to("[data-hero-layers]", { autoAlpha: 0, y: 70, duration: 0.34 }, 0);
+
+      /* Title lifts away over the first stretch. */
+      tl.to(
+        titleRef.current,
+        { yPercent: -45, autoAlpha: 0, ease: "power1.in", duration: 0.42 },
+        0,
+      );
+
+      /* Caption fades in only once the card is near full-screen. */
+      tl.fromTo(
+        "[data-hero-caption]",
+        { autoAlpha: 0, y: 20 },
+        { autoAlpha: 1, y: 0, duration: 0.25 },
+        0.72,
+      );
+    },
+    { scope: rootRef },
+  );
+
   return (
     <section
       id="home"
-      className="relative min-h-screen bg-ink text-paper flex flex-col overflow-hidden"
+      ref={rootRef}
+      className="relative h-screen bg-paper overflow-hidden"
     >
-      {/* Full-bleed image split — fills the entire hero */}
-      <div className="absolute inset-0">
-        {/* Mobile / small screens: a single full-bleed conveyor */}
-        <div className="md:hidden absolute inset-0">
-          <VerticalLoop slides={projects} direction="up" />
-        </div>
+      {/* Backdrop */}
+      <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none" />
+      <div className="absolute -top-32 -left-32 w-105 h-105 rounded-full bg-violet/20 blur-[90px] pointer-events-none" />
+      <div className="absolute top-10 -right-24 w-90 h-90 rounded-full bg-accent/15 blur-[90px] pointer-events-none" />
 
-        {/* md+ : left half slides up · right half slides down */}
-        <div className="hidden md:flex absolute inset-0">
-          <div className="w-1/2 h-full">
-            <VerticalLoop slides={leftSlides} direction="up" />
-          </div>
-          <div className="w-1/2 h-full">
-            <VerticalLoop slides={rightSlides} direction="down" />
-          </div>
-        </div>
-      </div>
+      <Asterisk
+        className="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-44 sm:w-60 md:w-72 lg:w-96 xl:w-md text-royal/40"
+        spin
+      />
 
-      {/* Legibility scrim — darkens the imagery so the copy stays readable */}
-      <div className="absolute inset-0 bg-linear-to-b from-ink/55 via-ink/45 to-ink/75 pointer-events-none" />
-      <div className="absolute inset-0 bg-ink/25 pointer-events-none" />
+      
+      <img
+        src={mascot}
+        alt=""
+        aria-hidden="true"
+        className="absolute bottom-0 left-0 -translate-x-[27%] w-52 sm:w-64 md:w-72 lg:w-80 xl:w-104 z-20 pointer-events-none select-none drop-shadow-[0_18px_26px_rgba(0,0,0,0.22)]"
+      />
 
-      {/* Hairline divider down the seam between the two panels */}
-      <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-paper/20 z-10 pointer-events-none" />
-
-      {/* Centred copy, overlaid on the split */}
-      <div className="relative z-20 flex-1 flex items-center pt-32 pb-16">
-        <div
-          data-hero="content"
-          className="max-w-275 w-full mx-auto px-6 md:px-12 flex flex-col items-center text-center"
-        >
-          <h1
-            data-split
-            className="text-paper font-display capitalize tracking-[-0.04em] leading-[0.86]
-                       text-[clamp(2.6rem,9vw,9rem)] drop-shadow-[0_8px_40px_rgba(0,0,0,0.45)]"
-          >
-            Bringing vision
-            <br />
-            to life.
-          </h1>
-
-          <p
-            data-reveal="up"
-            data-reveal-delay="0.15"
-            className="font-script-desc mt-9 text-paper/85 text-lg md:text-xl leading-relaxed max-w-xl"
-          >
-            A premium animation studio crafting cinematic stories, original
-            IPs, and next-gen visual experiences for global audiences.
-          </p>
-
-          <div
-            data-reveal="up"
-            data-reveal-delay="0.25"
-            className="mt-10 flex flex-wrap items-center justify-center gap-4"
-          >
-            <Pill as="a" href="#work">
-              Explore our work
-            </Pill>
-            <a
-              href="#showreel"
-              data-magnetic="0.25"
-              className="group inline-flex items-center gap-3 rounded-full border border-paper/30 pl-6 pr-1.5 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-paper hover:border-paper/60 transition-colors"
-            >
-              Watch showreel
-              <span className="w-10 h-10 grid place-items-center rounded-full border border-paper/30 group-hover:bg-accent group-hover:border-accent transition-colors">
-                <ArrowGlyph className="w-4 h-4" />
-              </span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Bottom marquee band */}
+      {/* ---- Title ---- */}
       <div
-        data-hero="marquee"
-        className="relative z-20 border-t border-b border-paper/15 bg-ink/85 backdrop-blur-sm py-4 md:py-5"
+        ref={titleRef}
+        className="absolute top-0 inset-x-0 z-20 pt-18 md:pt-30 px-6 flex flex-col items-center text-center"
       >
-        <Marquee speed={40}>
-          {reel.map((w, i) => (
-            <span key={i} className="flex items-center">
-              <span
-                className={`font-body uppercase leading-none px-6 md:px-8 text-[18px] md:text-[22px] font-semibold tracking-[0.16em] ${
-                  i % 2 ? "text-paper/55" : "text-paper"
-                }`}
-              >
-                {w}
-              </span>
-              <Asterisk className="w-4 md:w-5 text-accent shrink-0" spin />
-            </span>
-          ))}
-        </Marquee>
+
+
+        <h1
+          data-reveal="up"
+          data-reveal-delay="0.08"
+          className="font-display capitalize text-ink leading-[0.92] tracking-[-0.03em] text-[clamp(2.2rem,6.5vw,5.6rem)] max-w-5xl"
+        >
+          Bringing <span className="text-royal">vision</span> to life.
+        </h1>
+
+        
+      </div>
+
+      {/* Colourful card layers tucked BEHIND the video card (image look) */}
+      <div
+        data-hero-layers
+        className="absolute inset-0 z-10 pointer-events-none hidden sm:block"
+      >
+        <div
+          className="absolute rounded-[44px] bg-sun shadow-[0_30px_70px_-30px_rgba(0,0,0,0.3)]"
+          style={{
+            top: "39%",
+            left: "14%",
+            right: "22%",
+            bottom: "2%",
+            transform: "rotate(-6deg)",
+          }}
+        />
+        <div
+          className="absolute rounded-[44px] bg-accent shadow-[0_30px_70px_-30px_rgba(0,0,0,0.3)]"
+          style={{
+            top: "39%",
+            left: "15.5%",
+            right: "19%",
+            bottom: "1%",
+            transform: "rotate(-3deg)",
+          }}
+        />
+      </div>
+
+      {/* ---- Expanding video card (clip-path window, full-screen layer) ---- */}
+      <div
+        ref={cardRef}
+        style={{ clipPath: CLIP_REST, willChange: "clip-path, transform" }}
+        className="absolute inset-0 z-30 overflow-hidden bg-royal"
+      >
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          src={VIDEO_SRC}
+          poster={VIDEO_POSTER}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-black/55 via-transparent to-black/15 pointer-events-none" />
+
+        {/* Live badge (clipped at rest, appears once full-screen) */}
+        <div className="absolute top-6 left-6 md:top-8 md:left-8 z-10 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/35 border border-white/20 backdrop-blur-md text-[10px] font-semibold uppercase tracking-[0.2em] text-white/90">
+          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse-dot" />
+          Reel · 2026
+        </div>
+
+        {/* Caption (fades in near full-screen) */}
+        <div
+          data-hero-caption
+          className="absolute bottom-0 inset-x-0 px-6 md:px-12 py-6 md:py-10 flex flex-col md:flex-row md:items-end md:justify-between gap-3 bg-linear-to-t from-black/75 to-transparent"
+        >
+          <div className="font-display text-white text-2xl md:text-5xl leading-none tracking-tight">
+            Showreel.
+          </div>
+
+          {/* Video controls — live inside the card, fading in with the
+              caption once the card grows toward full-screen. */}
+          <div className="flex items-center gap-2">
+            {/* Sound toggle */}
+            <button
+              type="button"
+              onClick={toggleMute}
+              aria-label={isMuted ? "Unmute" : "Mute"}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-black/35 border border-white/20 backdrop-blur-md text-white/90 hover:bg-black/55 transition-colors"
+            >
+              {isMuted ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M11 5 6 9H2v6h4l5 4V5z" />
+                  <line x1="23" y1="9" x2="17" y2="15" />
+                  <line x1="17" y1="9" x2="23" y2="15" />
+                </svg>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M11 5 6 9H2v6h4l5 4V5z" />
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                </svg>
+              )}
+            </button>
+
+            {/* Fullscreen toggle */}
+            <button
+              type="button"
+              onClick={toggleFullscreen}
+              aria-label={isFullscreen ? "Exit fullscreen" : "View fullscreen"}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-black/35 border border-white/20 backdrop-blur-md text-white/90 hover:bg-black/55 transition-colors"
+            >
+              {isFullscreen ? (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 9H4m0 0V4m0 5 6-6m5 5h5m0 0V4m0 5-6-6M9 15H4m0 0v5m0-5 6 6m5-6h5m0 0v5m0-5-6 6" />
+                </svg>
+              ) : (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3m13-5v3a2 2 0 0 1-2 2h-3" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll cue */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2 text-ink/50 pointer-events-none">
+        <span className="text-[10px] font-semibold uppercase tracking-[0.24em]">
+          Scroll
+        </span>
+        <span className="w-px h-8 bg-linear-to-b from-ink/50 to-transparent" />
       </div>
     </section>
   );

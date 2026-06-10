@@ -8,7 +8,6 @@ import gigglebellies from "../assets/Projects/Gigglebellies.webp";
 import nitinThirpola from "../assets/Team/Nitin_Thirpola.webp";
 import akshayKumarSingh from "../assets/Team/Akshay_Kumar_Singh.webp";
 import anandUpadhyay from "../assets/Team/Anand_Upadhyay.webp";
-import anuragMourya from "../assets/Team/Anurag_Mourya.webp";
 
 // Stylized "Starry Night" illustrated portraits — one per person (front of the flip cards).
 import ajayIllu from "../assets/Team/Team_Illustrators/Ajay_Singh_Bisht_illu.webp";

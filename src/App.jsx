@@ -51,7 +51,7 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <div className="min-h-screen bg-paper text-ink font-body overflow-x-hidden antialiased">
+    <div className="min-h-screen bg-paper text-ink font-body overflow-x-clip antialiased">
       <CustomCursor />
       <ScrollProgress />
       <ScrollToTop />

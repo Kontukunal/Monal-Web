@@ -70,7 +70,7 @@
   }
 
   ::selection {
-    background: var(--color-royal);
+    background: var(--color-ink);
     color: #ffffff;
   }
 }
@@ -129,6 +129,47 @@
 }
 .bg-pill-vibrant:hover {
   background-position: 100% 50%, 0 0;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Minimal-luxe ambient system
+ *  Premium depth on a monochrome (ink/paper) base — colour arrives
+ *  only as faint, faceted brand light derived from the MONAL logo.
+ * ------------------------------------------------------------------ */
+
+/* Soft brand-tinted gradient mesh for LIGHT sections — felt, not seen. */
+.bg-facets {
+  background-image:
+    radial-gradient(58% 50% at 12% 6%,  rgba(30, 64, 175, 0.055) 0%, transparent 60%),
+    radial-gradient(46% 46% at 88% 10%, rgba(236, 72, 153, 0.055) 0%, transparent 62%),
+    radial-gradient(58% 56% at 82% 92%, rgba(249, 115, 22, 0.045) 0%, transparent 60%),
+    radial-gradient(50% 50% at 16% 90%, rgba(124, 92, 255, 0.05)  0%, transparent 60%);
+}
+
+/* Same mesh, tuned brighter for DARK (ink) sections. */
+.bg-facets-dark {
+  background-image:
+    radial-gradient(55% 50% at 8% 4%,   rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+    radial-gradient(46% 46% at 92% 8%,  rgba(236, 72, 153, 0.12) 0%, transparent 62%),
+    radial-gradient(58% 56% at 86% 94%, rgba(249, 115, 22, 0.09) 0%, transparent 60%),
+    radial-gradient(52% 52% at 12% 94%, rgba(124, 92, 255, 0.12) 0%, transparent 60%);
+}
+
+/* Fine fractal grain — a whisper of texture for premium paper depth.
+   Apply on an absolutely-positioned overlay with low opacity. */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Hairline rule that fades at both ends — premium section divider. */
+.rule-fade {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(90deg, transparent, var(--color-line), transparent);
+}
+.rule-fade-light {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.16), transparent);
 }
 
 /* Faint dotted backdrop */
@@ -193,7 +234,7 @@
   left: 0;
   width: 16px;
   height: 16px;
-  background-color: var(--color-royal);
+  background-color: var(--color-ink);
   border-radius: 9999px;
   pointer-events: none;
   z-index: 10000;
@@ -214,5 +255,5 @@
 /* --------------------------- scrollbar ----------------------------- */
 
 ::-webkit-scrollbar { width: 9px; }
-::-webkit-scrollbar-track { background: #efedf8; }
-::-webkit-scrollbar-thumb { background: var(--color-royal); border-radius: 9px; }
+::-webkit-scrollbar-track { background: var(--color-mist); }
+::-webkit-scrollbar-thumb { background: var(--color-ink); border-radius: 9px; }

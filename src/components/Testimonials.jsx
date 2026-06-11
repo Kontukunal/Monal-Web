@@ -56,8 +56,7 @@ const TESTIMONIALS = [
 const TestimonialCard = ({ t }) => (
   <article className="group mb-5 md:mb-6 break-inside-avoid rounded-[26px] bg-mist border border-line p-6 md:p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_35px_70px_-40px_rgba(20,17,30,0.4)]">
     <span
-      className="block font-display text-5xl leading-none select-none mb-3"
-      style={{ color: t.color }}
+      className="headline-vibrant block font-display text-5xl leading-none select-none mb-3"
       aria-hidden="true"
     >
       &rdquo;
@@ -70,8 +69,7 @@ const TestimonialCard = ({ t }) => (
         src={t.photo}
         alt={t.name}
         loading="lazy"
-        className="w-11 h-11 rounded-full object-cover shrink-0 border-2 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
-        style={{ borderColor: t.color }}
+        className="w-11 h-11 rounded-full object-cover shrink-0 border-2 border-line transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
       />
       <div className="leading-tight">
         <div className="font-display text-base text-ink">{t.name}</div>
@@ -86,6 +84,7 @@ const TestimonialCard = ({ t }) => (
 const Testimonials = () => {
   return (
     <Panel id="testimonials" bg="bg-paper">
+      <div className="absolute inset-0 bg-facets pointer-events-none" />
       <div className="relative max-w-[1200px] mx-auto px-6 md:px-12 py-24 md:py-28 w-full">
         <div className="flex flex-col items-center text-center gap-5 mb-14 md:mb-16">
           <div data-reveal="up">

@@ -1,9 +1,20 @@
 import React from "react";
-import { Eyebrow, Asterisk } from "./Decor";
+import { Eyebrow } from "./Decor";
 import pearl from "../assets/Pearl.png";
 
-/* Flat-top hexagon mask for the image plate. */
-const HEX_CLIP = "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)";
+/* Hexagon plate with softly ROUNDED corners (quadratic curves at each
+   vertex), used as a mask so the gradient + stripes clip to the shape. */
+const HEX_MASK =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M35 0 L65 0 Q75 0 79.47 8.94 L95.53 41.06 Q100 50 95.53 58.94 L79.47 91.06 Q75 100 65 100 L35 100 Q25 100 20.53 91.06 L4.47 58.94 Q0 50 4.47 41.06 L20.53 8.94 Q25 0 35 0 Z' fill='black'/%3E%3C/svg%3E\")";
+
+const HEX_MASK_STYLE = {
+  WebkitMaskImage: HEX_MASK,
+  maskImage: HEX_MASK,
+  WebkitMaskRepeat: "no-repeat",
+  maskRepeat: "no-repeat",
+  WebkitMaskSize: "100% 100%",
+  maskSize: "100% 100%",
+};
 
 /* Diagonal stripe texture overlay. */
 const STRIPES = {
@@ -30,9 +41,9 @@ const About = () => {
       id="about"
       className="relative bg-mist py-12 md:py-16 overflow-hidden border-t border-line"
     >
-      {/* Faint dotted texture + decorative asterisks */}
-      {/* <div className="absolute inset-0 bg-dots opacity-30 pointer-events-none" /> */}
-      {/* <Asterisk className="absolute -top-12 -left-12 w-44 text-accent/15 hidden md:block animate-spin-rev" /> */}
+      {/* Faint faceted brand light + grain */}
+      <div className="absolute inset-0 bg-facets pointer-events-none" />
+      <div className="absolute inset-0 bg-noise opacity-[0.02] pointer-events-none" />
 
       <div className="relative max-w-295 mx-auto px-6 md:px-12">
         {/* Header */}
@@ -53,22 +64,21 @@ const About = () => {
           {/* Pearl on a striped hexagon plate, breaking out for a 3-D pop */}
           <div data-reveal="left" className="relative flex justify-center">
             <div data-tilt="7" className="relative w-full max-w-sm aspect-square">
-              {/* Soft warm glow */}
-              <div className="absolute inset-8 rounded-full bg-tangerine/35 blur-[70px]" />
+              {/* Soft pink glow complementing the lavender section */}
+              <div className="absolute inset-6 rounded-full bg-accent/35 blur-[65px]" />
 
-              {/* Hexagon plate — warm gradient + diagonal stripes */}
-              <div
-                className="absolute inset-0 bg-linear-to-br from-tangerine via-accent to-sun shadow-[0_50px_100px_-30px_rgba(251,122,60,0.6)]"
-                style={{ clipPath: HEX_CLIP }}
-              >
-                <div className="absolute inset-0" style={STRIPES} />
-                <div className="absolute -top-6 -right-6 w-44 h-44 rounded-full bg-white/15 blur-2xl" />
+              {/* Hexagon plate — pink→violet brand plate against the lavender,
+                  with softly rounded corners. Outer div carries a shape-
+                  following drop shadow; inner div is masked to the hexagon. */}
+              <div className="absolute inset-0 drop-shadow-[0_40px_60px_rgba(236,72,153,0.45)]">
+                <div
+                  className="absolute inset-0 bg-linear-to-br from-accent via-accent to-violet"
+                  style={HEX_MASK_STYLE}
+                >
+                  <div className="absolute inset-0" style={STRIPES} />
+                  <div className="absolute -top-6 -right-6 w-44 h-44 rounded-full bg-white/15 blur-2xl" />
+                </div>
               </div>
-
-              {/* Floating accents */}
-              <span className="absolute top-8 right-10 w-4 h-4 rounded-full bg-royal animate-float" />
-              <span className="absolute bottom-10 left-8 w-3.5 h-3.5 rounded-md rotate-12 bg-sky animate-float-slow" />
-              <Asterisk className="absolute -bottom-2 right-8 w-14 text-royal z-10" spin />
 
               {/* Pearl — bigger, breaks out above the hexagon for depth */}
               <img
@@ -99,9 +109,9 @@ const About = () => {
               {FEATURES.map((f) => (
                 <li
                   key={f.title}
-                  className="group flex items-center gap-4 rounded-2xl bg-paper border border-line px-4 py-3.5 transition-all duration-300 hover:border-royal/30 hover:shadow-[0_16px_40px_-26px_rgba(12,12,12,0.5)]"
+                  className="group flex items-center gap-4 rounded-2xl bg-paper border border-line px-4 py-3.5 transition-all duration-300 hover:border-ink/20 hover:shadow-[0_16px_40px_-26px_rgba(12,12,12,0.5)]"
                 >
-                  <span className="grid place-items-center w-9 h-9 rounded-xl bg-royal/12 text-royal shrink-0 transition-colors duration-300 group-hover:bg-royal group-hover:text-white">
+                  <span className="grid place-items-center w-9 h-9 rounded-xl bg-ink/6 text-ink shrink-0 transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
@@ -126,15 +136,11 @@ const About = () => {
               key={s.label}
               className="group relative overflow-hidden rounded-2xl bg-paper border border-line p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_48px_-26px_rgba(12,12,12,0.45)]"
             >
-              <span
-                className="absolute left-0 top-0 h-full w-1 transition-all duration-300 group-hover:w-1.5"
-                style={{ background: s.color }}
-              />
+              <span className="absolute left-0 top-0 h-full w-1 bg-ink/15 transition-all duration-300 group-hover:w-1.5 group-hover:bg-accent" />
               <div
                 data-counter={s.n}
                 data-counter-suffix={s.suffix}
-                className="font-display text-[clamp(2.2rem,4.5vw,3.2rem)] leading-none"
-                style={{ color: s.color }}
+                className="headline-vibrant font-display text-[clamp(2.2rem,4.5vw,3.2rem)] leading-none"
               >
                 {s.n}
                 {s.suffix}

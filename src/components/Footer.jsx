@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Eyebrow, Pill, Asterisk } from "./Decor";
+import { Eyebrow, Pill, Asterisk, Facets } from "./Decor";
 import { projects } from "../data/constants";
 import logo from "../assets/Monal_Logo.png";
+import logoArt from "../assets/Monal_Logo_art.png";
 
 const ctaArt = projects[4].img;
 
@@ -12,7 +13,7 @@ const SocialIcon = ({ children, href = "#", label }) => (
     aria-label={label}
     target="_blank"
     rel="noopener noreferrer"
-    className="w-11 h-11 rounded-full border border-white/25 text-white flex items-center justify-center hover:bg-royal hover:border-royal transition-all"
+    className="w-11 h-11 rounded-full border border-white/25 text-white flex items-center justify-center hover:bg-white hover:text-ink hover:border-white transition-all"
   >
     {children}
   </a>
@@ -24,7 +25,7 @@ const FooterLink = ({ href, children }) => (
       to={href}
       className="group inline-flex items-center justify-end lg:justify-start gap-2 text-white/60 hover:text-white transition-colors"
     >
-      <span className="w-0 h-[1.5px] bg-royal transition-all duration-300 group-hover:w-4" />
+      <span className="w-0 h-[1.5px] bg-white transition-all duration-300 group-hover:w-4" />
       {children}
     </Link>
   </li>
@@ -36,16 +37,13 @@ const Footer = () => {
       data-stack-panel
       className="relative bg-ink text-paper rounded-t-[34px] md:rounded-t-[52px] -mt-9 md:-mt-14 shadow-[0_-30px_70px_-28px_rgba(20,17,30,0.5)] overflow-hidden"
     >
-      <div className="absolute inset-0 bg-dots-light opacity-15 pointer-events-none" />
+      <div className="absolute inset-0 bg-facets-dark pointer-events-none" />
 
-      {/* CTA banner — blue card */}
+      {/* CTA banner — premium glass card with faint faceted light */}
       <div className="relative max-w-[1500px] mx-auto px-6 md:px-12 pt-24 md:pt-28 pb-4">
-        <div className="relative overflow-hidden rounded-[36px] bg-royal px-8 md:px-16 py-14 md:py-20">
-          <span className="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-white/10 pointer-events-none" />
-          <Asterisk
-            className="absolute top-8 right-10 w-12 text-white/25 hidden md:block"
-            spin
-          />
+        <div className="relative overflow-hidden rounded-[36px] bg-white/[0.04] border border-white/10 px-8 md:px-16 py-14 md:py-20">
+          <div className="absolute inset-0 bg-facets-dark pointer-events-none" />
+          <Facets className="absolute -top-8 -right-8 w-120 h-auto" opacity={0.1} />
 
           <div className="relative grid lg:grid-cols-2 gap-10 items-center">
             <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
@@ -113,13 +111,13 @@ const Footer = () => {
               <div className="space-y-2 mb-6">
                 <a
                   href="mailto:hello@monaldigital.com"
-                  className="block text-white/75 text-base md:text-lg hover:text-royal transition-colors break-all"
+                  className="block text-white/75 text-base md:text-lg hover:text-white transition-colors break-all"
                 >
                   hello@monaldigital.com
                 </a>
                 <a
                   href="tel:+917830314847"
-                  className="block text-white/75 text-base md:text-lg hover:text-royal transition-colors"
+                  className="block text-white/75 text-base md:text-lg hover:text-white transition-colors"
                 >
                   +91 78303 14847
                 </a>
@@ -147,11 +145,16 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Giant wordmark */}
-      <div className="relative px-4 pt-12 md:pt-20 pb-10 md:pb-16 select-none">
-        <h2 className="font-roar text-center leading-[0.78] tracking-[0.06em] text-[23vw] text-white">
-          MONAL
-        </h2>
+      {/* Giant logo */}
+      <div className="relative px-6 md:px-12 pt-12 md:pt-20 pb-10 md:pb-16 select-none">
+        <img
+          src={logoArt}
+          alt="Monal"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+          className="w-full max-w-375 mx-auto h-auto"
+        />
       </div>
 
       {/* Bottom bar */}
@@ -191,7 +194,7 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center justify-center text-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/45">
-            <Asterisk className="w-3.5 h-3.5 text-royal" spin />© 2026 Monal
+            <Asterisk className="w-3.5 h-3.5 text-white/40" spin />© 2026 Monal
             Digital — Crafted with vision in Haldwani
           </div>
         </div>

@@ -64,6 +64,35 @@ export const ArrowGlyph = ({ className = "" }) => (
   </svg>
 );
 
+/* Facets — an abstract field of low-poly triangular shards echoing the
+   faceted MONAL logo. Purely decorative ambient brand texture; keep the
+   opacity low (it's meant to be felt, not seen). Position it absolutely
+   on a section and let it bleed off an edge. */
+const FACET_SHARDS = [
+  { p: "0,40 46,8 30,72", c: "#1e40af" },
+  { p: "46,8 96,30 30,72", c: "#be185d" },
+  { p: "96,30 30,72 92,96", c: "#ec4899" },
+  { p: "92,96 30,72 140,86", c: "#fb7185" },
+  { p: "96,30 158,12 140,86", c: "#f97316" },
+  { p: "158,12 200,52 140,86", c: "#facc15" },
+  { p: "200,52 140,86 196,112", c: "#7c5cff" },
+  { p: "46,8 96,30 100,-6", c: "#3b82f6" },
+];
+
+export const Facets = ({ className = "", opacity = 0.1 }) => (
+  <svg
+    viewBox="0 0 200 110"
+    aria-hidden="true"
+    preserveAspectRatio="xMidYMid slice"
+    style={{ opacity }}
+    className={`pointer-events-none ${className}`}
+  >
+    {FACET_SHARDS.map((s, i) => (
+      <polygon key={i} points={s.p} fill={s.c} />
+    ))}
+  </svg>
+);
+
 /* Section eyebrow — a small rounded chip with a coloured dot.
    tone "light" sits on light backgrounds, "dark" on dark panels. */
 export const Eyebrow = ({

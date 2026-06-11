@@ -186,10 +186,9 @@ const Hero = () => {
       ref={rootRef}
       className="relative h-screen bg-paper overflow-hidden"
     >
-      {/* Backdrop */}
-      <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none" />
-      <div className="absolute -top-32 -left-32 w-105 h-105 rounded-full bg-violet/20 blur-[90px] pointer-events-none" />
-      <div className="absolute top-10 -right-24 w-90 h-90 rounded-full bg-accent/15 blur-[90px] pointer-events-none" />
+      {/* Backdrop — minimal-luxe: faint faceted brand light + grain */}
+      <div className="absolute inset-0 bg-facets pointer-events-none" />
+      <div className="absolute inset-0 bg-noise opacity-[0.025] pointer-events-none" />
 
       {/* <Asterisk
         className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-44 sm:w-60 md:w-72 lg:w-96 xl:w-md text-royal/40"
@@ -247,13 +246,13 @@ const Hero = () => {
 
       </div>
 
-      {/* Colourful card layers tucked BEHIND the video card (image look) */}
+      {/* Colourful card layers tucked BEHIND the video card — brand tones */}
       <div
         data-hero-layers
         className="absolute inset-0 z-10 pointer-events-none hidden sm:block"
       >
         <div
-          className="absolute rounded-[44px] bg-sun shadow-[0_30px_70px_-30px_rgba(0,0,0,0.3)]"
+          className="absolute rounded-[44px] bg-sun shadow-[0_30px_70px_-30px_rgba(20,17,30,0.35)]"
           style={{
             top: "39%",
             left: "14%",
@@ -263,7 +262,7 @@ const Hero = () => {
           }}
         />
         <div
-          className="absolute rounded-[44px] bg-accent shadow-[0_30px_70px_-30px_rgba(0,0,0,0.3)]"
+          className="absolute rounded-[44px] bg-accent shadow-[0_30px_70px_-30px_rgba(20,17,30,0.35)]"
           style={{
             top: "39%",
             left: "15.5%",
@@ -278,7 +277,7 @@ const Hero = () => {
       <div
         ref={cardRef}
         style={{ clipPath: CLIP_REST, willChange: "clip-path, transform" }}
-        className="absolute inset-0 z-30 overflow-hidden bg-royal"
+        className="absolute inset-0 z-30 overflow-hidden bg-ink"
       >
         <video
           ref={videoRef}

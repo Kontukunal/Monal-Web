@@ -20,7 +20,7 @@ const NavLink = ({ href, children }) => (
     className="group relative text-[15px] font-medium text-ink/70 hover:text-ink transition-colors"
   >
     {children}
-    <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-royal rounded-full transition-all duration-300 group-hover:w-full" />
+    <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-ink rounded-full transition-all duration-300 group-hover:w-full" />
   </Link>
 );
 
@@ -140,7 +140,7 @@ const Header = () => {
               <span className="font-display text-3xl leading-none">
                 {label}
               </span>
-              <ArrowGlyph className="w-5 h-5 text-white/40 group-hover:text-royal transition-colors" />
+              <ArrowGlyph className="w-5 h-5 text-white/40 group-hover:text-white transition-colors" />
             </Link>
           ))}
           <Pill

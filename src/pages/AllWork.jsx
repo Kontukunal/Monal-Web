@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Eyebrow, ArrowGlyph } from "../components/Decor";
+import { Eyebrow, ArrowGlyph, Facets } from "../components/Decor";
 import { projects } from "../data/constants";
 import { useUiAnimations } from "../hooks/useUiAnimations";
 
@@ -17,7 +17,8 @@ const AllWork = () => {
        *  Hero
        * ---------------------------------------------------------- */}
       <section className="relative bg-ink text-paper overflow-hidden">
-        <div className="absolute inset-0 bg-dots-white opacity-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-facets-dark pointer-events-none" />
+        <Facets className="absolute -top-10 -right-10 w-160 h-auto" opacity={0.08} />
 
         {/* Back link */}
         <div className="absolute top-28 md:top-32 left-6 md:left-12 z-10">

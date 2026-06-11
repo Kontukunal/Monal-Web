@@ -87,7 +87,10 @@ export const Eyebrow = ({
 };
 
 /* Pill button — the single CTA component across the site.
-   variants: primary (purple) · dark (black) · light (white/outline) · ghost (on dark) */
+   The filled variants (primary/dark/accent) "paint" themselves with the
+   MONAL logo artwork via .bg-pill-vibrant, so buttons share the same
+   multi-colour brand identity as the headline highlights.
+   variants: primary · dark · accent (logo-fill) · light · ghost (outlined) */
 export const Pill = ({
   as = "button",
   children,
@@ -98,8 +101,9 @@ export const Pill = ({
 }) => {
   const Tag = as;
   const styles = {
-    primary: "bg-royal text-white hover:bg-violet shadow-[0_14px_30px_-12px_rgba(91,70,232,0.7)]",
-    dark: "bg-ink text-white hover:bg-royal",
+    primary: "bg-pill-vibrant text-white shadow-[0_14px_30px_-12px_rgba(20,17,30,0.55)]",
+    dark: "bg-pill-vibrant text-white",
+    accent: "bg-pill-vibrant text-white",
     light: "bg-paper text-ink border border-line hover:border-ink/30",
     ghost: "bg-transparent text-white border border-white/35 hover:bg-white hover:text-ink",
   };

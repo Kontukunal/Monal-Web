@@ -85,7 +85,7 @@ const Team = () => {
             data-reveal-delay="0.08"
             className="font-display capitalize text-ink text-[clamp(2rem,7vw,5.5rem)] leading-[0.94] max-w-3xl"
           >
-            Meet the <span className="text-royal">team.</span>
+            Meet the <span className="headline-vibrant">team.</span>
           </h2>
           <p
             data-reveal="up"

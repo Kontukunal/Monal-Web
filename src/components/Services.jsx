@@ -91,7 +91,7 @@ const Services = () => {
             data-reveal-delay="0.08"
             className="font-display capitalize text-white text-[clamp(2rem,7vw,5.5rem)] leading-[0.94] max-w-3xl"
           >
-            What we <span className="text-violet">create.</span>
+            What we <span className="headline-vibrant">create.</span>
           </h2>
           <p
             data-reveal="up"
@@ -136,7 +136,7 @@ const Services = () => {
               className="font-display capitalize text-white text-[clamp(1.6rem,4.5vw,3rem)] leading-[1.02] max-w-2xl"
             >
               Trusted by studios &amp; networks{" "}
-              <span className="text-violet">worldwide.</span>
+              <span className="headline-vibrant">worldwide.</span>
             </h3>
           </div>
 

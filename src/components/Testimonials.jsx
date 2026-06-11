@@ -96,7 +96,7 @@ const Testimonials = () => {
             data-reveal-delay="0.08"
             className="font-display capitalize text-ink text-[clamp(2rem,6.5vw,5rem)] leading-[0.96] max-w-3xl"
           >
-            Loved by <span className="text-royal">creators.</span>
+            Loved by <span className="headline-vibrant">creators.</span>
           </h2>
           <p
             data-reveal="up"

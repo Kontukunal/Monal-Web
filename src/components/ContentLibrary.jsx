@@ -29,7 +29,7 @@ const ContentLibrary = () => {
             data-reveal-delay="0.08"
             className="font-display capitalize text-ink text-[clamp(2rem,6.5vw,5rem)] leading-[0.96] max-w-3xl"
           >
-            Award-winning <span className="text-royal">stories.</span>
+            Award-winning <span className="headline-vibrant">stories.</span>
           </h2>
         </div>
 

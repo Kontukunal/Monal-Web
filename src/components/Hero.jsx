@@ -241,7 +241,7 @@ const Hero = () => {
           data-reveal-delay="0.08"
           className="font-display capitalize text-ink leading-[0.92] tracking-[-0.03em] text-[clamp(2.2rem,6.5vw,5.6rem)] max-w-5xl"
         >
-          Bringing <span className="text-royal">vision</span> to life.
+          Bringing <span className="headline-vibrant">vision</span> to life.
         </h1>
 
 

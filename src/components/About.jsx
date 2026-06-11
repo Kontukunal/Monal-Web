@@ -42,9 +42,9 @@ const About = () => {
           </div>
           <h2
             data-split
-            className="headline-vibrant font-display capitalize text-[clamp(2rem,7.5vw,7rem)] leading-[0.86] tracking-[-0.04em]"
+            className="font-display capitalize text-ink text-[clamp(2rem,7.5vw,7rem)] leading-[0.86] tracking-[-0.04em]"
           >
-            Who we <span className="text-royal">are.</span>
+            Who we <span className="headline-vibrant">are.</span>
           </h2>
         </div>
 

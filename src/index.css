@@ -86,6 +86,51 @@
 /* A coloured highlight word inside a heading. */
 .text-royal { color: var(--color-royal); }
 
+/* ------------------------------------------------------------------ *
+ *  Brand "logo-paint" theme
+ *  Fills text + buttons with the actual MONAL logo artwork so the
+ *  whole site shares one cohesive multi-colour brand identity.
+ *  Asset: src/assets/Monal_Logo_art.png (the faceted, colourful mark).
+ * ------------------------------------------------------------------ */
+
+/* Highlighted heading words painted with the logo artwork via
+   background-clip: text. A linear-gradient sits underneath as a
+   fallback. Applied to descendants (*) too so it survives GSAP
+   SplitText word-wrapping. */
+.headline-vibrant,
+.headline-vibrant * {
+  background-image:
+    url('./assets/Monal_Logo_art.png'),
+    linear-gradient(95deg,
+      #1e40af 0%, #be185d 28%, #ec4899 50%,
+      #fb7185 72%, #f97316 90%, #facc15 100%);
+  background-size: cover, 100% 100%;
+  background-position: center, 0 0;
+  background-repeat: no-repeat, no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Buttons reuse the same artwork, zoomed to 320% so only the faceted
+   colour patches show (the "MONAL" letters crop out). On hover the
+   image slides for a subtle shimmer — same brand DNA, different crop. */
+.bg-pill-vibrant {
+  background-image:
+    url('./assets/Monal_Logo_art.png'),
+    linear-gradient(95deg,
+      #1e3a8a 0%, #831843 22%, #be185d 42%,
+      #b91c1c 60%, #c2410c 78%, #1e3a8a 100%);
+  background-size: 320% auto, 100% 100%;
+  background-position: 0% 50%, 0 0;
+  background-repeat: no-repeat, no-repeat;
+  transition: background-position 1s ease, opacity 0.3s ease;
+}
+.bg-pill-vibrant:hover {
+  background-position: 100% 50%, 0 0;
+}
+
 /* Faint dotted backdrop */
 .bg-dots {
   background-image: radial-gradient(rgba(20, 17, 30, 0.08) 1.3px, transparent 1.4px);

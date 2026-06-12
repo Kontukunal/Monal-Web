@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { projects } from "../data/constants";
 import { Panel } from "./Panel";
-import { Eyebrow, ArrowGlyph } from "./Decor";
+import { Eyebrow, ArrowGlyph, Aurora } from "./Decor";
 
 const SPANS = [
   "col-span-2 row-span-2",
@@ -16,6 +16,7 @@ const SPANS = [
 const ContentLibrary = () => {
   return (
     <Panel id="work" bg="bg-mist">
+      <Aurora tone="light" />
       <div className="absolute inset-0 bg-facets pointer-events-none" />
       <div className="relative max-w-[1500px] mx-auto px-6 md:px-12 py-24 md:py-28 w-full">
         {/* Header */}

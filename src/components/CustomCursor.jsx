@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { prefersReducedMotion } from "../hooks/useUiAnimations";
 
-/* MONAL brand cursor colours, sampled from the logo artwork.
-   The cursor swaps between them depending on the brightness of the
-   surface it currently sits over, so it stays legible everywhere. */
-const COLOR_ON_LIGHT = "#ec4899"; /* hot pink  — dominant MONAL tone, pops on white */
-const COLOR_ON_DARK = "#facc15"; /* bright yellow — pops on near-black sections      */
+/* MONAL brand cursor colours — the single indigo brand hue, in two
+   tints so it stays legible on both light and dark surfaces. */
+const COLOR_ON_LIGHT = "#4f3fd6"; /* brand indigo — pops on white          */
+const COLOR_ON_DARK = "#8b7cff"; /* bright indigo — pops on near-black ink  */
 
 /* Walk up from the element under the pointer until we find a non-transparent
    background, then return its perceived luminance (0 = black, 1 = white). */

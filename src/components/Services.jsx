@@ -2,26 +2,44 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { services, brands } from "../data/constants";
 import { Panel } from "./Panel";
-import { Eyebrow, ArrowGlyph, Facets } from "./Decor";
+import { Eyebrow, ArrowGlyph, Facets, Aurora } from "./Decor";
 
 /* The popped-out character's height per card. (GR sits a touch larger.)
    The plate behind each character is a premium translucent ink panel —
    colour comes only from the artwork itself. */
+/* Per-card hover tone — each plate blooms to the indigo brand colour.
+   White number/arrow on the indigo plate. Full static class strings so
+   Tailwind keeps them in the build. */
 const CARDS = [
-  { imgClass: "h-80 md:h-88" },
-  { imgClass: "h-72 md:h-80" },
-  { imgClass: "h-72 md:h-80" },
+  {
+    imgClass: "h-80 md:h-88",
+    plate: "group-hover:bg-sky group-hover:border-sky",
+    text: "group-hover:text-white",
+    arrow: "group-hover:text-sky",
+  },
+  {
+    imgClass: "h-72 md:h-80",
+    plate: "group-hover:bg-royal group-hover:border-royal",
+    text: "group-hover:text-white",
+    arrow: "group-hover:text-royal",
+  },
+  {
+    imgClass: "h-72 md:h-80",
+    plate: "group-hover:bg-accent group-hover:border-accent",
+    text: "group-hover:text-white",
+    arrow: "group-hover:text-accent",
+  },
 ];
 
 /* One service card: a paper tile with a compact colour plate at the bottom and
    the character popping out the top (half in / half out) for a 3D lift. */
-const ServiceCard = ({ service, imgClass, num }) => (
+const ServiceCard = ({ service, imgClass, num, plate, text, arrow }) => (
   <Link
     to={`/services/${service.slug}`}
     data-tilt="4"
-    className="group flex flex-col h-full rounded-[30px] bg-white/4 border border-white/10 p-5 transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:bg-white/6"
+    className="group flex flex-col h-full w-full min-w-0 sm:basis-[calc(50%-0.9rem)] lg:basis-[calc(33.333%-1.2rem)] sm:max-w-md rounded-[30px] bg-white/4 border border-white/10 p-5 transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:bg-white/6"
   >
-    <div className="px-2 pt-3 pb-6 text-center">
+    <div className="px-2 pt-3 pb-6 text-center min-h-30 md:min-h-35">
       <p className="font-display text-2xl md:text-3xl leading-tight text-white">
         {service.eyebrow}
       </p>
@@ -33,8 +51,8 @@ const ServiceCard = ({ service, imgClass, num }) => (
     <div className="relative h-70 md:h-80 flex items-end mt-auto">
       {/* Plate container — NOT clipped, so the character can pop out the top */}
       <div className="relative w-full h-40 md:h-44 flex items-end">
-        {/* Clipped background — white plate that turns pink on card hover */}
-        <div className="absolute inset-0 rounded-3xl overflow-hidden bg-paper border border-line transition-colors duration-300 group-hover:bg-accent group-hover:border-accent" />
+        {/* Clipped background — white plate that takes the card's complement on hover */}
+        <div className={`absolute inset-0 rounded-3xl overflow-hidden bg-paper border border-line transition-colors duration-300 ${plate}`} />
 
         {/* Character — taller than the plate, so it sits half-in / half-out */}
         <img
@@ -45,12 +63,12 @@ const ServiceCard = ({ service, imgClass, num }) => (
         />
 
         {/* Number + arrow, on top of the character */}
-        <div className="relative z-10 w-full p-5 text-ink transition-colors duration-300 group-hover:text-white">
+        <div className={`relative z-10 w-full p-5 text-ink transition-colors duration-300 ${text}`}>
           <div className="flex items-end justify-between">
             <span className="font-display leading-none text-[clamp(2.2rem,5vw,3.5rem)]">
               {num}
             </span>
-            <span className="shrink-0 w-11 h-11 rounded-full bg-ink/10 backdrop-blur-sm grid place-items-center transition-all duration-300 group-hover:bg-white group-hover:text-accent">
+            <span className={`shrink-0 w-11 h-11 rounded-full bg-ink/10 backdrop-blur-sm grid place-items-center transition-all duration-300 group-hover:bg-white ${arrow}`}>
               <ArrowGlyph className="w-5 h-5" />
             </span>
           </div>
@@ -65,6 +83,7 @@ const Services = () => {
 
   return (
     <Panel id="services" bg="bg-ink">
+      <Aurora tone="dark" />
       <div className="absolute inset-0 bg-facets-dark pointer-events-none" />
       <Facets className="absolute -top-10 -right-10 w-160 h-auto" opacity={0.07} />
       <div className="relative max-w-[1200px] mx-auto px-6 md:px-12 py-24 md:py-28 w-full">
@@ -95,7 +114,7 @@ const Services = () => {
         {/* Three service cards */}
         <div
           data-reveal-group="up"
-          className="grid items-stretch gap-6 md:gap-7 sm:grid-cols-2 lg:grid-cols-3"
+          className="flex flex-wrap items-stretch justify-center gap-6 md:gap-7"
         >
           {keys.map((k, i) => {
             const card = CARDS[i % CARDS.length];
@@ -105,6 +124,9 @@ const Services = () => {
                 service={services[k]}
                 imgClass={card.imgClass}
                 num={String(i + 1).padStart(2, "0")}
+                plate={card.plate}
+                text={card.text}
+                arrow={card.arrow}
               />
             );
           })}
@@ -138,13 +160,13 @@ const Services = () => {
 
           <div
             data-reveal-group="up"
-            className="grid gap-6 md:gap-7 sm:grid-cols-2 lg:grid-cols-3"
+            className="flex flex-wrap items-stretch justify-center gap-6 md:gap-7"
           >
             {brands.map((b, i) => (
               <div
                 key={b.name}
                 data-tilt="4"
-                className={`group relative overflow-hidden rounded-[28px] p-8 md:p-9 min-h-52 flex items-center justify-center bg-white/3 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:bg-white/5 ${
+                className={`group relative overflow-hidden rounded-[28px] p-8 md:p-9 min-h-52 w-full min-w-0 sm:basis-[calc(50%-0.9rem)] lg:basis-[calc(33.333%-1.2rem)] sm:max-w-md flex items-center justify-center bg-white/3 border border-white/10 transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:bg-white/5 ${
                   i === 1 ? "lg:-mt-8" : ""
                 }`}
               >

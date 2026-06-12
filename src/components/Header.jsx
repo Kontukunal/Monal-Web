@@ -26,6 +26,7 @@ const NavLink = ({ href, children }) => (
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [atFooter, setAtFooter] = useState(false);
   const [open, setOpen] = useState(false);
   const rootRef = useRef(null);
 
@@ -34,6 +35,19 @@ const Header = () => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  /* Hide the navbar once the "Get in touch" (contact) section scrolls
+     into view, and bring it back when the user scrolls up out of it. */
+  useEffect(() => {
+    const contact = document.getElementById("contact");
+    if (!contact) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setAtFooter(entry.isIntersecting),
+      { rootMargin: "0px 0px -35% 0px" },
+    );
+    io.observe(contact);
+    return () => io.disconnect();
   }, []);
 
   useGSAP(
@@ -54,7 +68,11 @@ const Header = () => {
   return (
     <header
       ref={rootRef}
-      className="fixed top-0 left-0 w-full z-100 px-4 pt-4 md:pt-5"
+      className={`fixed top-0 left-0 w-full z-100 px-4 pt-4 md:pt-5 transition-all duration-500 ease-out ${
+        atFooter
+          ? "-translate-y-full opacity-0 pointer-events-none"
+          : "translate-y-0 opacity-100"
+      }`}
     >
       <div
         className={`max-w-300 mx-auto flex justify-between items-center gap-4 rounded-full border border-line bg-paper/85 backdrop-blur-xl pl-5 pr-2.5 py-2.5 transition-all duration-500 ${
@@ -79,9 +97,6 @@ const Header = () => {
             decoding="async"
             className="h-7 md:h-8 w-auto"
           />
-          <span className="hidden sm:block text-[11px] font-semibold uppercase tracking-[0.28em] text-ink/55 border-l border-line pl-2.5">
-            Digital
-          </span>
         </Link>
 
         {/* Center nav */}
@@ -99,7 +114,7 @@ const Header = () => {
         {/* CTA + mobile toggle */}
         <div data-header-item className="flex items-center gap-3">
           <div className="hidden lg:block">
-            <Pill as={Link} to="/#contact" variant="dark" magnetic={false}>
+            <Pill as={Link} to="/#contact" variant="paint" magnetic={false}>
               Get in touch
             </Pill>
           </div>
@@ -146,7 +161,7 @@ const Header = () => {
           <Pill
             as={Link}
             to="/#contact"
-            variant="primary"
+            variant="paint"
             magnetic={false}
             onClick={() => setOpen(false)}
             className="mt-5 justify-center"

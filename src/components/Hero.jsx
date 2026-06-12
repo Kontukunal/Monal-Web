@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Eyebrow, Pill, Asterisk } from "./Decor";
+import { Eyebrow, Pill, Asterisk, Aurora } from "./Decor";
 import { prefersReducedMotion } from "../hooks/useUiAnimations";
 import mascot from "../assets/Moonies.png";
 import monkey from "../assets/MONKEY.png";
@@ -14,6 +14,7 @@ const VIDEO_SRC = "/showreel/Showreel.mp4";
 const VIDEO_POSTER = "/showreel/Showreel-poster.webp";
 
 const CLIP_REST = "inset(42% 17% 0% 17% round 44px)";
+const CLIP_REST_MOBILE = "inset(55% 5% 8% 5% round 26px)";
 const CLIP_FULL = "inset(0% 0% 0% 0% round 0px)";
 
 const Hero = () => {
@@ -107,10 +108,13 @@ const Hero = () => {
         },
       });
 
-      /* Card expands from the resting card window to a full-bleed cover. */
+      /* Card expands from the resting card window to a full-bleed cover.
+         The rest window differs per breakpoint (portrait vs. landscape). */
+      const isMobile = window.matchMedia("(max-width: 639px)").matches;
+      const restClip = isMobile ? CLIP_REST_MOBILE : CLIP_REST;
       tl.fromTo(
         cardRef.current,
-        { clipPath: CLIP_REST, rotation: -2 },
+        { clipPath: restClip, rotation: isMobile ? 0 : -2 },
         { clipPath: CLIP_FULL, rotation: 0, ease: "none", duration: 1 },
         0,
       );
@@ -186,7 +190,8 @@ const Hero = () => {
       ref={rootRef}
       className="relative h-screen bg-paper overflow-hidden"
     >
-      {/* Backdrop — minimal-luxe: faint faceted brand light + grain */}
+      {/* Backdrop — living indigo aurora + faint faceted light + grain */}
+      <Aurora tone="light" />
       <div className="absolute inset-0 bg-facets pointer-events-none" />
       <div className="absolute inset-0 bg-noise opacity-[0.025] pointer-events-none" />
 
@@ -199,7 +204,7 @@ const Hero = () => {
         ref={monkeyRef}
         onMouseEnter={onMonkeyEnter}
         onMouseLeave={onMonkeyLeave}
-        className="absolute top-0 right-0 w-40 sm:w-52 md:w-60 lg:w-72 xl:w-80 z-20 select-none will-change-transform"
+        className="absolute top-14 right-0 w-40 sm:top-0 sm:right-0 sm:w-52 md:w-60 lg:w-72 xl:w-80 z-20 select-none will-change-transform"
       >
         <img
           ref={monkeyImgRef}
@@ -216,7 +221,7 @@ const Hero = () => {
         ref={mascotWrapRef}
         onMouseEnter={onMascotEnter}
         onMouseLeave={onMascotLeave}
-        className="absolute bottom-0 left-0 -translate-x-[27%] w-52 sm:w-64 md:w-72 lg:w-80 xl:w-104 z-20 select-none will-change-transform"
+        className="absolute bottom-[62%] left-1/2 -translate-x-1/2 w-56 z-20 sm:bottom-0 sm:left-0 sm:-translate-x-[27%] sm:w-64 md:w-72 lg:w-80 xl:w-104 select-none will-change-transform"
       >
         <img
           ref={mascotImgRef}
@@ -224,60 +229,52 @@ const Hero = () => {
           alt=""
           aria-hidden="true"
           draggable="false"
-          className="w-full drop-shadow-[0_18px_26px_rgba(0,0,0,0.22)] transition-[filter] duration-300 hover:drop-shadow-[0_26px_40px_rgba(37,99,235,0.35)] will-change-transform"
+          className="w-full drop-shadow-[0_18px_26px_rgba(0,0,0,0.22)] transition-[filter] duration-300 hover:drop-shadow-[0_26px_40px_rgba(79,63,214,0.35)] will-change-transform"
         />
       </div>
 
       {/* ---- Title ---- */}
       <div
         ref={titleRef}
-        className="absolute top-0 inset-x-0 z-20 pt-28 md:pt-44 px-6 flex flex-col items-center text-center"
+        className="absolute top-0 inset-x-0 bottom-[12%] z-20 px-6 flex flex-col items-center justify-center text-center md:bottom-auto md:pt-44 md:justify-start"
       >
 
 
         <h1
           data-reveal="up"
           data-reveal-delay="0.08"
-          className="font-display capitalize text-ink leading-[0.92] tracking-[-0.03em] text-[clamp(1.5rem,6.2vw,5.6rem)] whitespace-nowrap"
+          className="font-display capitalize text-ink leading-[1.05] md:leading-[0.92] tracking-[-0.03em] text-[clamp(2rem,8.6vw,3.2rem)] md:text-[clamp(1.5rem,6.2vw,5.6rem)] whitespace-normal md:whitespace-nowrap"
         >
-          Building worlds <span className="headline-vibrant">children</span> love.
+          Creating Worlds Kids <span className="headline-vibrant">Love.</span>
         </h1>
 
 
       </div>
 
-      {/* Colourful card layers tucked BEHIND the video card — brand tones */}
+      {/* Colourful card layers tucked BEHIND the video card — brand tones.
+          Positions are tuned per-breakpoint so the cards fan out and peek
+          behind the video on mobile too (not just desktop). */}
       <div
         data-hero-layers
-        className="absolute inset-0 z-10 pointer-events-none hidden sm:block"
+        className="absolute inset-0 z-10 pointer-events-none block"
       >
         <div
-          className="absolute rounded-[44px] bg-sun shadow-[0_30px_70px_-30px_rgba(20,17,30,0.35)]"
-          style={{
-            top: "39%",
-            left: "14%",
-            right: "22%",
-            bottom: "2%",
-            transform: "rotate(-6deg)",
-          }}
+          className="absolute rounded-[26px] sm:rounded-[44px] bg-[#cfc8f4] shadow-[0_30px_70px_-30px_rgba(79,63,214,0.35)]
+            top-[57%] left-[1%] right-[14%] bottom-[11%] rotate-[-5deg]
+            sm:top-[39%] sm:left-[14%] sm:right-[22%] sm:bottom-[2%] sm:rotate-[-6deg]"
         />
         <div
-          className="absolute rounded-[44px] bg-accent shadow-[0_30px_70px_-30px_rgba(20,17,30,0.35)]"
-          style={{
-            top: "39%",
-            left: "15.5%",
-            right: "19%",
-            bottom: "1%",
-            transform: "rotate(-3deg)",
-          }}
+          className="absolute rounded-[26px] sm:rounded-[44px] bg-accent shadow-[0_30px_70px_-30px_rgba(20,17,30,0.35)]
+            top-[56%] left-[12%] right-[2%] bottom-[6%] rotate-[4deg]
+            sm:top-[39%] sm:left-[15.5%] sm:right-[19%] sm:bottom-[1%] sm:rotate-[-3deg]"
         />
       </div>
 
       {/* ---- Expanding video card (clip-path window, full-screen layer) ---- */}
       <div
         ref={cardRef}
-        style={{ clipPath: CLIP_REST, willChange: "clip-path, transform" }}
-        className="absolute inset-0 z-30 overflow-hidden bg-ink"
+        style={{ willChange: "clip-path, transform" }}
+        className="hero-card-rest absolute inset-0 z-30 overflow-hidden bg-ink"
       >
         <video
           ref={videoRef}

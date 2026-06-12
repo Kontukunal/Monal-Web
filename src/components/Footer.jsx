@@ -53,11 +53,16 @@ const Footer = () => {
                 </Eyebrow>
               </div>
               <h2 className="font-display capitalize text-white text-[clamp(2rem,5vw,4.2rem)] leading-[0.98] max-w-xl">
-                Let's build the next classic.
+                Let's build the next children's brand.
               </h2>
+              <p className="mt-6 text-white/60 leading-relaxed max-w-lg">
+                Whether you&apos;re creating a new series, scaling a channel, or
+                developing an original IP, Monal can help bring it to life and
+                connect it with its audience.
+              </p>
               <div className="mt-10">
                 <Pill as={Link} to="/#contact" variant="ghost">
-                  Get in touch
+                  Start a conversation
                 </Pill>
               </div>
             </div>
@@ -95,8 +100,10 @@ const Footer = () => {
               </span>
             </Link>
             <p className="text-white/55 text-lg leading-relaxed max-w-sm mx-auto lg:mx-0">
-              A premium animation studio taking the very best of Indian creative
-              talent to global screens.
+              Monal Digital is a creative studio specializing in animation
+              production, YouTube growth, and children&apos;s entertainment. We
+              create stories, characters, and digital brands that reach millions
+              of families worldwide.
             </p>
           </div>
 
@@ -134,7 +141,7 @@ const Footer = () => {
                 Explore
               </div>
               <ul className="space-y-3.5 text-base">
-                <FooterLink href="/#work">Projects</FooterLink>
+                <FooterLink href="/#work">Portfolio</FooterLink>
                 <FooterLink href="/#about">Studio</FooterLink>
                 <FooterLink href="/#services">Solutions</FooterLink>
                 <FooterLink href="/#team">Team</FooterLink>
@@ -195,7 +202,7 @@ const Footer = () => {
 
           <div className="flex items-center justify-center text-center gap-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white/45">
             <Asterisk className="w-3.5 h-3.5 text-white/40" spin />© 2026 Monal
-            Digital — Crafted with vision in Haldwani
+            Digital · Crafted with vision in Haldwani
           </div>
         </div>
       </div>

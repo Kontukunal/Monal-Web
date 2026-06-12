@@ -9,7 +9,7 @@ import logo from "../assets/Monal_Logo.png";
 const NAV = [
   ["Home", "/#home"],
   ["About", "/#about"],
-  ["Work", "/#work"],
+  ["Portfolio", "/#work"],
   ["Solutions", "/#services"],
   ["Team", "/#team"],
 ];

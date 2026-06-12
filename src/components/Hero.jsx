@@ -231,16 +231,16 @@ const Hero = () => {
       {/* ---- Title ---- */}
       <div
         ref={titleRef}
-        className="absolute top-0 inset-x-0 z-20 pt-18 md:pt-30 px-6 flex flex-col items-center text-center"
+        className="absolute top-0 inset-x-0 z-20 pt-28 md:pt-44 px-6 flex flex-col items-center text-center"
       >
 
 
         <h1
           data-reveal="up"
           data-reveal-delay="0.08"
-          className="font-display capitalize text-ink leading-[0.92] tracking-[-0.03em] text-[clamp(2.2rem,6.5vw,5.6rem)] max-w-5xl"
+          className="font-display capitalize text-ink leading-[0.92] tracking-[-0.03em] text-[clamp(1.5rem,6.2vw,5.6rem)] whitespace-nowrap"
         >
-          Bringing <span className="headline-vibrant">vision</span> to life.
+          Building worlds <span className="headline-vibrant">children</span> love.
         </h1>
 
 

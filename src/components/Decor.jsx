@@ -64,10 +64,7 @@ export const ArrowGlyph = ({ className = "" }) => (
   </svg>
 );
 
-/* Facets — an abstract field of low-poly triangular shards echoing the
-   faceted MONAL logo. Purely decorative ambient brand texture; keep the
-   opacity low (it's meant to be felt, not seen). Position it absolutely
-   on a section and let it bleed off an edge. */
+
 const FACET_SHARDS = [
   { p: "0,40 46,8 30,72", c: "#1e40af" },
   { p: "46,8 96,30 30,72", c: "#be185d" },
@@ -115,11 +112,7 @@ export const Eyebrow = ({
   );
 };
 
-/* Pill button — the single CTA component across the site.
-   The filled variants (primary/dark/accent) "paint" themselves with the
-   MONAL logo artwork via .bg-pill-vibrant, so buttons share the same
-   multi-colour brand identity as the headline highlights.
-   variants: primary · dark · accent (logo-fill) · light · ghost (outlined) */
+
 export const Pill = ({
   as = "button",
   children,

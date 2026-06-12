@@ -34,24 +34,35 @@ const TeamCard = ({ m, i }) => {
         </div>
 
         {/* Name + role below, with an outlined connect button */}
-        <div className="flex items-center justify-between gap-3 px-2 pt-4 pb-1.5">
-          <div className="min-w-0">
-            <h4 className="font-display text-ink text-xl lg:text-[1.35rem] leading-tight truncate transition-colors duration-500 group-hover:text-white">
-              {m.name}
-            </h4>
-            <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted transition-colors duration-500 group-hover:text-white/80">
-              {m.role}
-            </p>
+        <div className="px-2 pt-4 pb-1.5">
+          <div className="flex items-center justify-between gap-3">
+            <div className="min-w-0">
+              <h4 className="font-display text-ink text-xl lg:text-[1.35rem] leading-tight truncate transition-colors duration-500 group-hover:text-white">
+                {m.name}
+              </h4>
+              <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.16em] text-muted transition-colors duration-500 group-hover:text-white/80">
+                {m.role}
+              </p>
+            </div>
+            <a
+              href={m.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${m.name} on LinkedIn`}
+              className="shrink-0 grid place-items-center w-10 h-10 rounded-full border border-line text-ink transition-all duration-300 group-hover:bg-white group-hover:text-accent group-hover:border-white hover:scale-115"
+            >
+              <LinkedInIcon className="w-4 h-4" />
+            </a>
           </div>
-          <a
-            href={m.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${m.name} on LinkedIn`}
-            className="shrink-0 grid place-items-center w-10 h-10 rounded-full border border-line text-ink transition-all duration-300 group-hover:bg-white group-hover:text-accent group-hover:border-white hover:scale-115"
-          >
-            <LinkedInIcon className="w-4 h-4" />
-          </a>
+
+          {/* Bio — revealed on hover */}
+          <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-500 ease-out">
+            <div className="overflow-hidden">
+              <p className="mt-3 text-[13px] leading-snug text-white/85">
+                {m.bio}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </article>
@@ -79,8 +90,8 @@ const Team = () => {
             data-reveal-delay="0.14"
             className="text-muted max-w-md leading-relaxed"
           >
-            Storytellers, animators, and visionaries crafting the next era of
-            India&apos;s digital studio culture.
+            Artists, storytellers, strategists, and builders shaping the future
+            of children&apos;s entertainment.
           </p>
         </div>
 

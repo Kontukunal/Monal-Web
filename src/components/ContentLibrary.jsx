@@ -28,8 +28,16 @@ const ContentLibrary = () => {
             data-reveal-delay="0.08"
             className="font-display capitalize text-ink text-[clamp(2rem,6.5vw,5rem)] leading-[0.96] max-w-3xl"
           >
-            Award-winning <span className="headline-vibrant">stories.</span>
+            Stories. Characters. <span className="headline-vibrant">Worlds.</span>
           </h2>
+          <p
+            data-reveal="up"
+            data-reveal-delay="0.14"
+            className="text-muted max-w-xl leading-relaxed"
+          >
+            A growing portfolio of animated brands, original IPs, and
+            children&apos;s content enjoyed by families across the globe.
+          </p>
         </div>
 
         {/* Mosaic */}

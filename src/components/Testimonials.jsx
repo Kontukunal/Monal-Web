@@ -2,54 +2,29 @@ import React from "react";
 import { Panel } from "./Panel";
 import { Eyebrow } from "./Decor";
 
+/* Real partner testimonials. Replace the placeholder quote and contact
+   fields below with authentic statements as they come in. */
 const TESTIMONIALS = [
   {
-    name: "Aarav Mehta",
-    role: "Creative Director · Lunar-X",
+    name: "Add contact name",
+    role: "Lunar X",
     quote:
-      "Monal turned a loose brief into a world our audience instantly fell for. With streamlined production and a relentless eye for craft, every frame felt intentional. Their work is unreal.",
+      "[Replace with an authentic testimonial from Lunar X about working with Monal.]",
     color: "#5b46e8",
-    photo: "https://i.pravatar.cc/150?img=12",
   },
   {
-    name: "Sophie Bennett",
-    role: "Head of Content · Adruto",
+    name: "Add contact name",
+    role: "Shemaroo",
     quote:
-      "From storyboard to final render, every frame felt intentional. A genuine creative partner.",
+      "[Replace with an authentic testimonial from Shemaroo about working with Monal.]",
     color: "#ec4899",
-    photo: "https://i.pravatar.cc/150?img=5",
   },
   {
-    name: "Daniel Cruz",
-    role: "Showrunner · The Boldeye",
+    name: "Add contact name",
+    role: "FreeBird",
     quote:
-      "They don't just animate — they build characters that live rent-free in kids' heads. Of all the studios we've worked with, this one stands out for taste and reliability.",
+      "[Replace with an authentic testimonial from FreeBird about working with Monal.]",
     color: "#fb7a3c",
-    photo: "https://i.pravatar.cc/150?img=33",
-  },
-  {
-    name: "Priya Nair",
-    role: "Brand Lead · Skyline Media",
-    quote:
-      "Deadlines, polish, originality — Monal delivered on all three without blinking.",
-    color: "#22c55e",
-    photo: "https://i.pravatar.cc/150?img=49",
-  },
-  {
-    name: "Marcus Hale",
-    role: "Producer · Nimbus Toons",
-    quote:
-      "Our series found a global audience because Monal made it look genuinely world-class. Their intuitive process and real-time updates make them an indispensable asset.",
-    color: "#3b82f6",
-    photo: "https://i.pravatar.cc/150?img=68",
-  },
-  {
-    name: "Lena Park",
-    role: "Marketing Head · BrightKids",
-    quote:
-      "Working with Monal feels like adding a senior creative team to ours overnight.",
-    color: "#facc15",
-    photo: "https://i.pravatar.cc/150?img=44",
   },
 ];
 
@@ -65,12 +40,13 @@ const TestimonialCard = ({ t }) => (
     <p className="text-ink/80 leading-relaxed mb-7">{t.quote}</p>
 
     <div className="flex items-center gap-3 border-t border-line pt-5">
-      <img
-        src={t.photo}
-        alt={t.name}
-        loading="lazy"
-        className="w-11 h-11 rounded-full object-cover shrink-0 border-2 border-line transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
-      />
+      <span
+        className="grid place-items-center w-11 h-11 rounded-full shrink-0 font-display text-base text-white transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+        style={{ backgroundColor: t.color }}
+        aria-hidden="true"
+      >
+        {t.role.charAt(0)}
+      </span>
       <div className="leading-tight">
         <div className="font-display text-base text-ink">{t.name}</div>
         <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-muted mt-1">
@@ -95,15 +71,14 @@ const Testimonials = () => {
             data-reveal-delay="0.08"
             className="font-display capitalize text-ink text-[clamp(2rem,6.5vw,5rem)] leading-[0.96] max-w-3xl"
           >
-            Loved by <span className="headline-vibrant">creators.</span>
+            Loved by <span className="headline-vibrant">partners.</span>
           </h2>
           <p
             data-reveal="up"
             data-reveal-delay="0.14"
             className="text-muted max-w-md leading-relaxed"
           >
-            Studios, networks, and founders on what it&apos;s like to build
-            worlds with Monal.
+            What studios, creators, and brands say about working with Monal.
           </p>
         </div>
 

@@ -19,13 +19,18 @@ const ServiceCard = ({ service, imgClass, num }) => (
   <Link
     to={`/services/${service.slug}`}
     data-tilt="4"
-    className="group block rounded-[30px] bg-white/4 border border-white/10 p-5 transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:bg-white/6"
+    className="group flex flex-col h-full rounded-[30px] bg-white/4 border border-white/10 p-5 transition-all duration-500 hover:-translate-y-2 hover:border-white/20 hover:bg-white/6"
   >
-    <p className="px-2 pt-3 pb-6 text-center font-display text-2xl md:text-3xl leading-tight text-white">
-      {service.eyebrow}
-    </p>
+    <div className="px-2 pt-3 pb-6 text-center">
+      <p className="font-display text-2xl md:text-3xl leading-tight text-white">
+        {service.eyebrow}
+      </p>
+      <p className="mt-2 text-sm font-medium tracking-wide text-white/55">
+        {service.tagline}
+      </p>
+    </div>
 
-    <div className="relative h-70 md:h-80 flex items-end">
+    <div className="relative h-70 md:h-80 flex items-end mt-auto">
       {/* Plate container — NOT clipped, so the character can pop out the top */}
       <div className="relative w-full h-40 md:h-44 flex items-end">
         {/* Clipped background — white plate that turns pink on card hover */}
@@ -82,15 +87,15 @@ const Services = () => {
             data-reveal-delay="0.14"
             className="text-white/60 max-w-md leading-relaxed"
           >
-            From the first sketch to the final cut — three studios of craft,
-            working as one pipeline.
+            From concept to audience, all within one integrated creative and
+            distribution pipeline.
           </p>
         </div>
 
         {/* Three service cards */}
         <div
           data-reveal-group="up"
-          className="grid items-start gap-6 md:gap-7 sm:grid-cols-2 lg:grid-cols-3"
+          className="grid items-stretch gap-6 md:gap-7 sm:grid-cols-2 lg:grid-cols-3"
         >
           {keys.map((k, i) => {
             const card = CARDS[i % CARDS.length];
@@ -118,14 +123,16 @@ const Services = () => {
               data-reveal-delay="0.08"
               className="font-display capitalize text-white text-[clamp(2rem,6.5vw,5rem)] leading-[0.96] max-w-3xl"
             >
-              Trusted <span className="headline-vibrant">worldwide.</span>
+              Trusted by creators &amp; studios{" "}
+              <span className="headline-vibrant">worldwide.</span>
             </h2>
             <p
               data-reveal="up"
               data-reveal-delay="0.14"
               className="text-white/60 max-w-md leading-relaxed"
             >
-              The studios and networks we build worlds with.
+              Collaborating with partners who believe great stories deserve
+              great audiences.
             </p>
           </div>
 

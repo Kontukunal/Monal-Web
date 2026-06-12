@@ -23,16 +23,25 @@ const STRIPES = {
 };
 
 const FEATURES = [
-  { title: "Original IP", desc: "developed and owned in-house." },
-  { title: "End-to-end production", desc: "from first script to final render." },
-  { title: "Global distribution", desc: "across OTT, broadcast and digital." },
+  {
+    title: "Original IP Development",
+    desc: "Creating characters, stories, and worlds designed for long-term growth.",
+  },
+  {
+    title: "End-to-End Production",
+    desc: "From concept art and scripting to animation, publishing, and distribution.",
+  },
+  {
+    title: "Audience-First Strategy",
+    desc: "Creative decisions backed by data, analytics, and real audience behaviour.",
+  },
 ];
 
 const STATS = [
-  { n: "10", suffix: "+", label: "Years of craft", color: "#5b46e8" },
-  { n: "25", suffix: "M+", label: "Subscribers reached", color: "#ec4899" },
-  { n: "200", suffix: "+", label: "Projects delivered", color: "#fb7a3c" },
-  { n: "12", suffix: "+", label: "Industry awards", color: "#3b82f6" },
+  { n: "10", suffix: "+", label: "Years of Creative Excellence", color: "#5b46e8" },
+  { n: "50", suffix: "M+", label: "Subscribers Across Our Network", color: "#ec4899" },
+  { n: "20", suffix: "B+", label: "Lifetime Views", color: "#fb7a3c" },
+  { n: "100", suffix: "+", label: "Channels & Projects Managed", color: "#3b82f6" },
 ];
 
 const About = () => {
@@ -94,15 +103,19 @@ const About = () => {
           {/* Story + feature points */}
           <div data-reveal="right" className="flex flex-col justify-center">
             <p className="font-script-desc text-muted text-lg leading-relaxed mb-5 max-w-xl">
-              Founded in 2015 in Haldwani, Monal Digital is a premium animation
-              studio crafting cinematic stories, original IPs, and next-gen
-              visual experiences for audiences around the world.
+              Founded in Uttarakhand, Monal Digital is a creative studio
+              specializing in animation, YouTube growth, and children&apos;s
+              entertainment.
+            </p>
+            <p className="text-muted leading-relaxed mb-5 max-w-xl">
+              We help studios, creators, and brands transform ideas into
+              characters, stories, and digital worlds that connect with
+              audiences at scale.
             </p>
             <p className="text-muted leading-relaxed mb-8 max-w-xl">
-              From the first sketch to the final frame, our artists, directors,
-              and engineers work as one — obsessed with detail, driven by story,
-              and building worlds that travel from our desks to millions of
-              screens.
+              Over the last decade, our work has generated billions of views,
+              built global audiences, and helped launch original intellectual
+              properties enjoyed by children around the world.
             </p>
 
             <ul className="space-y-3">

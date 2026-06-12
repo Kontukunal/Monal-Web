@@ -7,7 +7,7 @@ import { services } from "../data/constants";
 import { useUiAnimations } from "../hooks/useUiAnimations";
 
 /* Stable display order — drives the prev / next service navigation. */
-const ORDER = ["pre", "production", "post"];
+const ORDER = ["pre", "production", "distribution"];
 
 /* ------------------------------------------------------------------ *
  *  A single expandable discipline row. Uses the CSS grid-rows
@@ -126,7 +126,7 @@ const ServiceDetail = () => {
         <div className="relative max-w-[1500px] mx-auto px-6 md:px-12 pt-40 md:pt-48 pb-16 md:pb-24 text-center">
           <div data-reveal="up" className="mb-6 flex justify-center">
             <Eyebrow tone="light">
-              {service.number} — {service.eyebrow}
+              {service.number} · {service.eyebrow}
             </Eyebrow>
           </div>
 

@@ -90,49 +90,6 @@ export const Facets = ({ className = "", opacity = 0.1 }) => (
   </svg>
 );
 
-/* ------------------------------------------------------------------ *
- *  Aurora — living indigo light that drifts like slow waves behind a
- *  section. Blurred, blended blobs animated purely in CSS (see
- *  index.css .aurora*). tone "light" multiplies into white paper;
- *  tone "dark" glows on ink panels. Always decorative / inert.
- * ------------------------------------------------------------------ */
-const AURORA_BLOBS = {
-  light: [
-    { size: "46vw", top: "-12%", left: "-8%", flow: "a", c: "#7c6ff2" },
-    { size: "40vw", top: "8%",   left: "58%", flow: "b", c: "#9b8eff" },
-    { size: "36vw", top: "52%",  left: "4%",  flow: "c", c: "#4f3fd6" },
-    { size: "32vw", top: "58%",  left: "66%", flow: "a", c: "#6a5bf0" },
-  ],
-  dark: [
-    { size: "48vw", top: "-14%", left: "-6%", flow: "b", c: "#6a5bf0" },
-    { size: "42vw", top: "6%",   left: "60%", flow: "a", c: "#8b7cff" },
-    { size: "38vw", top: "54%",  left: "2%",  flow: "c", c: "#4f3fd6" },
-    { size: "34vw", top: "60%",  left: "64%", flow: "b", c: "#34269e" },
-  ],
-};
-
-export const Aurora = ({ tone = "light", className = "" }) => (
-  <div
-    className={`aurora ${tone === "dark" ? "aurora--dark" : ""} ${className}`}
-    aria-hidden="true"
-  >
-    {AURORA_BLOBS[tone].map((b, i) => (
-      <span
-        key={i}
-        className="aurora__blob"
-        data-flow={b.flow}
-        style={{
-          width: b.size,
-          height: b.size,
-          top: b.top,
-          left: b.left,
-          background: `radial-gradient(circle at 50% 50%, ${b.c} 0%, transparent 70%)`,
-        }}
-      />
-    ))}
-  </div>
-);
-
 /* Section eyebrow — a small rounded chip with a coloured dot.
    tone "light" sits on light backgrounds, "dark" on dark panels. */
 export const Eyebrow = ({
@@ -169,7 +126,6 @@ export const Pill = ({
     primary: "bg-pill-vibrant text-white shadow-[0_14px_30px_-12px_rgba(20,17,30,0.55)]",
     dark: "bg-pill-vibrant text-white",
     accent: "bg-pill-vibrant text-white",
-    paint: "bg-pill-paint text-white shadow-[0_14px_30px_-12px_rgba(20,17,30,0.55)]",
     light: "bg-paper text-ink border border-line hover:border-ink/30",
     ghost: "bg-transparent text-white border border-white/35 hover:bg-white hover:text-ink",
   };

@@ -99,15 +99,9 @@ export function useUiAnimations() {
        panels are always fully visible and stay in normal flow — all content
        remains scrollable/readable. ---- */
     gsap.utils.toArray("[data-stack-panel]").forEach((panel) => {
-      /* Travel (40) is kept SMALLER than each panel's negative-margin
-         overlap (48–64px, see Panel/Footer) so the rising panel always
-         covers the previous section's plain bottom edge — no flat strip is
-         ever exposed at the seam — while the overlap stays modest so panels
-         don't climb up onto the previous section's content. The sections'
-         generous bottom padding (96–112px) leaves a clean gap at each seam. */
       gsap.fromTo(
         panel,
-        { y: 40 },
+        { y: 120 },
         {
           y: 0,
           ease: "none",

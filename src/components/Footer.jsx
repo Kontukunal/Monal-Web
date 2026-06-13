@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Eyebrow, Pill, Asterisk, Facets, Aurora } from "./Decor";
+import { Eyebrow, Pill, Asterisk, Facets } from "./Decor";
 import { projects } from "../data/constants";
 import logo from "../assets/Monal_Logo.png";
 import logoArt from "../assets/Monal_Logo_art.png";
@@ -35,9 +35,8 @@ const Footer = () => {
   return (
     <footer
       data-stack-panel
-      className="relative bg-ink text-paper rounded-t-[34px] md:rounded-t-[52px] -mt-12 md:-mt-16 shadow-[0_-30px_70px_-28px_rgba(20,17,30,0.5)] overflow-hidden"
+      className="relative bg-ink text-paper rounded-t-[34px] md:rounded-t-[52px] -mt-9 md:-mt-14 shadow-[0_-30px_70px_-28px_rgba(20,17,30,0.5)] overflow-hidden"
     >
-      <Aurora tone="dark" />
       <div className="absolute inset-0 bg-facets-dark pointer-events-none" />
 
       {/* CTA banner — premium glass card with faint faceted light */}

@@ -26,7 +26,7 @@ const ScrollProgress = () => {
     <div className="fixed top-0 left-0 right-0 h-[3px] z-70 pointer-events-none">
       <div
         ref={barRef}
-        className="h-full w-full origin-left scale-x-0 wave-band"
+        className="h-full w-full origin-left scale-x-0 bg-accent"
       />
     </div>
   );

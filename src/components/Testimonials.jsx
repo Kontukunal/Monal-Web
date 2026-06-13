@@ -1,6 +1,6 @@
 import React from "react";
 import { Panel } from "./Panel";
-import { Eyebrow, Aurora } from "./Decor";
+import { Eyebrow } from "./Decor";
 
 /* Real partner testimonials. Replace the placeholder quote and contact
    fields below with authentic statements as they come in. */
@@ -10,26 +10,26 @@ const TESTIMONIALS = [
     role: "Lunar X",
     quote:
       "[Replace with an authentic testimonial from Lunar X about working with Monal.]",
-    color: "#34269e",
+    color: "#5b46e8",
   },
   {
     name: "Add contact name",
     role: "Shemaroo",
     quote:
       "[Replace with an authentic testimonial from Shemaroo about working with Monal.]",
-    color: "#4f3fd6",
+    color: "#ec4899",
   },
   {
     name: "Add contact name",
     role: "FreeBird",
     quote:
       "[Replace with an authentic testimonial from FreeBird about working with Monal.]",
-    color: "#6a5bf0",
+    color: "#fb7a3c",
   },
 ];
 
 const TestimonialCard = ({ t }) => (
-  <article data-tilt="4" className="group mb-5 md:mb-6 break-inside-avoid rounded-[26px] bg-mist border border-line p-6 md:p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-royal/30 hover:shadow-[0_35px_70px_-40px_rgba(79,63,214,0.4)]">
+  <article className="group mb-5 md:mb-6 break-inside-avoid rounded-[26px] bg-mist border border-line p-6 md:p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_35px_70px_-40px_rgba(20,17,30,0.4)]">
     <span
       className="headline-vibrant block font-display text-5xl leading-none select-none mb-3"
       aria-hidden="true"
@@ -60,7 +60,6 @@ const TestimonialCard = ({ t }) => (
 const Testimonials = () => {
   return (
     <Panel id="testimonials" bg="bg-paper">
-      <Aurora tone="light" />
       <div className="absolute inset-0 bg-facets pointer-events-none" />
       <div className="relative max-w-[1200px] mx-auto px-6 md:px-12 py-24 md:py-28 w-full">
         <div className="flex flex-col items-center text-center gap-5 mb-14 md:mb-16">

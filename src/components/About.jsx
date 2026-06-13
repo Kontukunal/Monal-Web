@@ -1,5 +1,5 @@
 import React from "react";
-import { Eyebrow, Aurora } from "./Decor";
+import { Eyebrow } from "./Decor";
 import pearl from "../assets/Pearl.png";
 
 /* Hexagon plate with softly ROUNDED corners (quadratic curves at each
@@ -38,20 +38,19 @@ const FEATURES = [
 ];
 
 const STATS = [
-  { n: "10", suffix: "+", label: "Years of Creative Excellence", color: "#34269e" },
-  { n: "100", suffix: "M+", label: "Subscribers Across Our Network", color: "#4f3fd6" },
-  { n: "50", suffix: "B+", label: "Lifetime Views", color: "#6a5bf0" },
-  { n: "100", suffix: "+", label: "Channels & Projects Managed", color: "#8b7cff" },
+  { n: "10", suffix: "+", label: "Years of Creative Excellence", color: "#5b46e8" },
+  { n: "50", suffix: "M+", label: "Subscribers Across Our Network", color: "#ec4899" },
+  { n: "20", suffix: "B+", label: "Lifetime Views", color: "#fb7a3c" },
+  { n: "100", suffix: "+", label: "Channels & Projects Managed", color: "#3b82f6" },
 ];
 
 const About = () => {
   return (
     <section
       id="about"
-      className="relative bg-mist pt-12 md:pt-16 pb-24 md:pb-28 overflow-x-clip border-t border-line"
+      className="relative bg-mist py-12 md:py-16 overflow-hidden border-t border-line"
     >
-      {/* Living indigo aurora + faint faceted light + grain */}
-      <Aurora tone="light" />
+      {/* Faint faceted brand light + grain */}
       <div className="absolute inset-0 bg-facets pointer-events-none" />
       <div className="absolute inset-0 bg-noise opacity-[0.02] pointer-events-none" />
 
@@ -73,14 +72,14 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           {/* Pearl on a striped hexagon plate, breaking out for a 3-D pop */}
           <div data-reveal="left" className="relative flex justify-center">
-            <div data-tilt="7" className="relative w-full max-w-60 sm:max-w-sm aspect-square">
+            <div data-tilt="7" className="relative w-full max-w-sm aspect-square">
               {/* Soft pink glow complementing the lavender section */}
               <div className="absolute inset-6 rounded-full bg-accent/35 blur-[65px]" />
 
               {/* Hexagon plate — pink→violet brand plate against the lavender,
                   with softly rounded corners. Outer div carries a shape-
                   following drop shadow; inner div is masked to the hexagon. */}
-              <div className="absolute inset-0 drop-shadow-[0_40px_60px_rgba(79,63,214,0.42)]">
+              <div className="absolute inset-0 drop-shadow-[0_40px_60px_rgba(236,72,153,0.45)]">
                 <div
                   className="absolute inset-0 bg-linear-to-br from-accent via-accent to-violet"
                   style={HEX_MASK_STYLE}
@@ -96,13 +95,13 @@ const About = () => {
                 alt="Monal Pearl"
                 loading="lazy"
                 draggable="false"
-                className="absolute left-1/2 -translate-x-1/2 -top-[24%] w-[110%] max-w-none z-10 origin-bottom animate-dance drop-shadow-[0_40px_55px_rgba(20,17,30,0.5)] transition-[scale,filter] duration-300 hover:scale-105 hover:drop-shadow-[0_46px_65px_rgba(79,63,214,0.5)] select-none"
+                className="absolute left-1/2 -translate-x-1/2 -top-[24%] w-[110%] max-w-none z-10 origin-bottom animate-dance drop-shadow-[0_40px_55px_rgba(20,17,30,0.5)] transition-[scale,filter] duration-300 hover:scale-105 hover:drop-shadow-[0_46px_65px_rgba(251,122,60,0.55)] select-none"
               />
             </div>
           </div>
 
           {/* Story + feature points */}
-          <div data-reveal="right" className="flex flex-col justify-center items-center text-center lg:items-start lg:text-left">
+          <div data-reveal="right" className="flex flex-col justify-center">
             <p className="font-script-desc text-muted text-lg leading-relaxed mb-5 max-w-xl">
               Founded in Uttarakhand, Monal Digital is a creative studio
               specializing in animation, YouTube growth, and children&apos;s
@@ -119,7 +118,7 @@ const About = () => {
               properties enjoyed by children around the world.
             </p>
 
-            <ul className="space-y-3 w-full text-left">
+            <ul className="space-y-3">
               {FEATURES.map((f) => (
                 <li
                   key={f.title}
@@ -148,8 +147,7 @@ const About = () => {
           {STATS.map((s) => (
             <div
               key={s.label}
-              data-tilt="7"
-              className="group relative overflow-hidden rounded-2xl bg-paper border border-line p-5 transition-all duration-300 hover:-translate-y-1 hover:border-royal/25 hover:shadow-[0_22px_48px_-26px_rgba(79,63,214,0.4)]"
+              className="group relative overflow-hidden rounded-2xl bg-paper border border-line p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_48px_-26px_rgba(12,12,12,0.45)]"
             >
               <span className="absolute left-0 top-0 h-full w-1 bg-ink/15 transition-all duration-300 group-hover:w-1.5 group-hover:bg-accent" />
               <div
@@ -167,13 +165,6 @@ const About = () => {
           ))}
         </div>
       </div>
-
-      {/* Colour skirt — fills the band the rising Content panel would
-          otherwise expose as white, so About flows into it seamlessly. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-full h-40 bg-mist"
-      />
     </section>
   );
 };

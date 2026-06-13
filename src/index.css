@@ -13,36 +13,29 @@
 }
 
 /* ------------------------------------------------------------------ *
- *  Monal Digital — "Indigo Luxe" theme
- *  Editorial ink + paper monochrome base. ONE confident brand colour:
- *  deep indigo. The logo's full rainbow survives only as tiny flecks
- *  (facet decor + the literal logo art). Living indigo aurora drifts
- *  beneath the white sections.
+ *  Monal Digital — "Wollo" inspired theme
+ *  White canvas · vivid purple primary · playful multi-colour cards.
+ *  Big rounded Fredoka headings. Stacked, overlapping scroll panels.
  * ------------------------------------------------------------------ */
 
 @theme {
-  --color-ink: #14121f;        /* cool near-black headings + text      */
-  --color-paper: #ffffff;      /* white canvas                         */
-  --color-mist: #f4f3fb;       /* soft indigo-tinted off-white         */
-  --color-cloud: #e9e7f6;      /* light indigo fill                    */
-  --color-line: #e7e5f3;       /* hairline borders                     */
-  --color-muted: #6a6680;      /* muted body text                      */
+  --color-ink: #14111e;        /* near-black headings + text          */
+  --color-paper: #ffffff;      /* white canvas                        */
+  --color-mist: #f5f4fb;       /* soft lavender off-white             */
+  --color-cloud: #eceaf6;      /* light fill                          */
+  --color-line: #ece9f6;       /* hairline borders                    */
+  --color-muted: #6b6780;      /* muted body text                     */
 
-  /* Single-colour brand system — deep indigo + its tints/shades.
-     `accent`, `sky`, `mint`, `tangerine`, `sun` are intentionally
-     collapsed into the indigo family so the whole site reads in one
-     confident hue (the few legacy class names keep working). */
-  --color-royal: #4f3fd6;      /* PRIMARY indigo — buttons, accents    */
-  --color-violet: #6a5bf0;     /* lighter indigo                       */
-  --color-glow: #8b7cff;       /* bright indigo for highlights / glow  */
-  --color-deep: #34269e;       /* deep indigo for depth                */
-  --color-accent: #4f3fd6;     /* was pink — now brand indigo          */
-  --color-tangerine: #34269e;  /* was orange — deep indigo             */
-  --color-sun: #ece9fb;        /* was yellow — pale indigo plate       */
-  --color-sky: #4f3fd6;        /* was blue — brand indigo              */
-  --color-mint: #6a5bf0;       /* was green — light indigo             */
+  /* Vivid accent palette */
+  --color-royal: #5b46e8;      /* PRIMARY purple — hero card, buttons */
+  --color-violet: #7c5cff;     /* lighter violet                      */
+  --color-accent: #ec4899;     /* pink                                */
+  --color-tangerine: #fb7a3c;  /* orange                              */
+  --color-sun: #facc15;        /* yellow                              */
+  --color-sky: #3b82f6;        /* blue                                */
+  --color-mint: #22c55e;       /* green                               */
 
-  /* Poppins — geometric rounded sans for everything. */
+  /* Poppins — geometric rounded sans (Wollo-style) for everything. */
   --font-display: "Poppins", system-ui, sans-serif;
   --font-body: "Poppins", system-ui, sans-serif;
 }
@@ -94,16 +87,16 @@
 .text-royal { color: var(--color-royal); }
 
 /* ------------------------------------------------------------------ *
- *  Indigo brand highlight + buttons
- *  One confident hue, applied with a soft animated gradient so the
- *  highlight words and CTAs feel alive without resorting to rainbow.
+ *  Brand "logo-paint" theme
+ *  Fills text + buttons with the actual MONAL logo artwork so the
+ *  whole site shares one cohesive multi-colour brand identity.
+ *  Asset: src/assets/Monal_Logo_art.png (the faceted, colourful mark).
  * ------------------------------------------------------------------ */
 
-/* Highlighted heading words painted with the actual MONAL logo artwork
-   via background-clip: text, so the accent words carry the brand's full
-   multi-colour identity. A linear-gradient sits underneath as a fallback.
-   Applied to descendants (*) too so it survives GSAP SplitText word-
-   wrapping. */
+/* Highlighted heading words painted with the logo artwork via
+   background-clip: text. A linear-gradient sits underneath as a
+   fallback. Applied to descendants (*) too so it survives GSAP
+   SplitText word-wrapping. */
 .headline-vibrant,
 .headline-vibrant * {
   background-image:
@@ -120,28 +113,10 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Buttons — a deep indigo gradient with a moving sheen on hover. */
+/* Buttons reuse the same artwork, zoomed to 320% so only the faceted
+   colour patches show (the "MONAL" letters crop out). On hover the
+   image slides for a subtle shimmer — same brand DNA, different crop. */
 .bg-pill-vibrant {
-  background-image: linear-gradient(
-    100deg,
-    var(--color-deep) 0%,
-    var(--color-royal) 45%,
-    var(--color-violet) 75%,
-    var(--color-royal) 100%
-  );
-  background-size: 200% auto;
-  background-position: 0% 50%;
-  transition: background-position 0.9s ease, box-shadow 0.4s ease,
-    transform 0.3s ease;
-}
-.bg-pill-vibrant:hover {
-  background-position: 100% 50%;
-}
-
-/* Original logo-paint pill — the faceted MONAL artwork zoomed to 320%
-   so only the colour patches show. Reserved for the nav "Get in touch"
-   button as a vivid brand flourish against the indigo-luxe system. */
-.bg-pill-paint {
   background-image:
     url('./assets/Monal_Logo_art.png'),
     linear-gradient(95deg,
@@ -152,7 +127,7 @@
   background-repeat: no-repeat, no-repeat;
   transition: background-position 1s ease, opacity 0.3s ease;
 }
-.bg-pill-paint:hover {
+.bg-pill-vibrant:hover {
   background-position: 100% 50%, 0 0;
 }
 
@@ -162,85 +137,22 @@
  *  only as faint, faceted brand light derived from the MONAL logo.
  * ------------------------------------------------------------------ */
 
-/* Soft indigo gradient mesh for LIGHT sections — felt, not seen. */
+/* Soft brand-tinted gradient mesh for LIGHT sections — felt, not seen. */
 .bg-facets {
   background-image:
-    radial-gradient(58% 50% at 12% 6%,  rgba(79, 63, 214, 0.06)  0%, transparent 60%),
-    radial-gradient(46% 46% at 88% 10%, rgba(139, 124, 255, 0.06) 0%, transparent 62%),
-    radial-gradient(58% 56% at 82% 92%, rgba(52, 38, 158, 0.045) 0%, transparent 60%),
-    radial-gradient(50% 50% at 16% 90%, rgba(106, 91, 240, 0.05)  0%, transparent 60%);
+    radial-gradient(58% 50% at 12% 6%,  rgba(30, 64, 175, 0.055) 0%, transparent 60%),
+    radial-gradient(46% 46% at 88% 10%, rgba(236, 72, 153, 0.055) 0%, transparent 62%),
+    radial-gradient(58% 56% at 82% 92%, rgba(249, 115, 22, 0.045) 0%, transparent 60%),
+    radial-gradient(50% 50% at 16% 90%, rgba(124, 92, 255, 0.05)  0%, transparent 60%);
 }
 
 /* Same mesh, tuned brighter for DARK (ink) sections. */
 .bg-facets-dark {
   background-image:
-    radial-gradient(55% 50% at 8% 4%,   rgba(106, 91, 240, 0.14) 0%, transparent 60%),
-    radial-gradient(46% 46% at 92% 8%,  rgba(139, 124, 255, 0.13) 0%, transparent 62%),
-    radial-gradient(58% 56% at 86% 94%, rgba(79, 63, 214, 0.12)  0%, transparent 60%),
-    radial-gradient(52% 52% at 12% 94%, rgba(52, 38, 158, 0.16)  0%, transparent 60%);
-}
-
-/* ------------------------------------------------------------------ *
- *  Living aurora — drifting indigo light that moves like slow waves
- *  beneath the white (and dark) sections. Pure CSS transforms on
- *  blurred blobs: GPU-cheap, and frozen flat under reduced-motion.
- * ------------------------------------------------------------------ */
-.aurora {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-.aurora__blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.5;
-  will-change: transform;
-  mix-blend-mode: multiply;       /* sinks into white paper             */
-}
-.aurora--dark .aurora__blob {
-  mix-blend-mode: screen;         /* glows on ink                       */
-  filter: blur(80px);
-  opacity: 0.42;
-}
-
-@keyframes aurora-drift-a {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  33%      { transform: translate3d(14%, 8%, 0) scale(1.18); }
-  66%      { transform: translate3d(-8%, 14%, 0) scale(0.92); }
-}
-@keyframes aurora-drift-b {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
-  40%      { transform: translate3d(-16%, -10%, 0) scale(0.9); }
-  75%      { transform: translate3d(10%, -6%, 0) scale(1.2); }
-}
-@keyframes aurora-drift-c {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(0.95); }
-  50%      { transform: translate3d(12%, -14%, 0) scale(1.22); }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .aurora__blob[data-flow="a"] { animation: aurora-drift-a 19s ease-in-out infinite; }
-  .aurora__blob[data-flow="b"] { animation: aurora-drift-b 23s ease-in-out infinite; }
-  .aurora__blob[data-flow="c"] { animation: aurora-drift-c 27s ease-in-out infinite; }
-}
-
-/* Animated wavefront band — a slow gradient sweep used for dividers
-   and ribbons. background-size > 100% + pan = a flowing wave of hue. */
-.wave-band {
-  background-image: linear-gradient(
-    100deg,
-    var(--color-deep), var(--color-royal),
-    var(--color-glow), var(--color-violet), var(--color-deep)
-  );
-  background-size: 300% 100%;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .wave-band { animation: md-wave-pan 9s linear infinite; }
-}
-@keyframes md-wave-pan {
-  to { background-position: 300% 50%; }
+    radial-gradient(55% 50% at 8% 4%,   rgba(59, 130, 246, 0.12) 0%, transparent 60%),
+    radial-gradient(46% 46% at 92% 8%,  rgba(236, 72, 153, 0.12) 0%, transparent 62%),
+    radial-gradient(58% 56% at 86% 94%, rgba(249, 115, 22, 0.09) 0%, transparent 60%),
+    radial-gradient(52% 52% at 12% 94%, rgba(124, 92, 255, 0.12) 0%, transparent 60%);
 }
 
 /* Fine fractal grain — a whisper of texture for premium paper depth.
@@ -280,15 +192,6 @@
 
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-/* Hero showreel card resting window. Portrait on desktop; a wider,
-   lower landscape strip on phones (leaves room above for the heading,
-   Moonies, and the fanned stack cards). GSAP expands it to full-bleed
-   on scroll; under reduced-motion this class is what stays. */
-.hero-card-rest { clip-path: inset(42% 17% 0% 17% round 44px); }
-@media (max-width: 639px) {
-  .hero-card-rest { clip-path: inset(55% 5% 8% 5% round 26px); }
-}
 
 /* --------------------------- keyframes ----------------------------- */
 
